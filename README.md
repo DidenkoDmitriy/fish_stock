@@ -1,2 +1,2 @@
 "# fish_stock" 
-This project made by Dmitriy to KhNIRO.
+This project made by Dmitriy and Vladislav to KhNIRO.
