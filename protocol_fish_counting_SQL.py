@@ -12,21 +12,20 @@ def get_age_struct_from_sql(
         ):
     # Reading data from SQL base [FISH_WORK].[dbo].[bioanalis$]
     conn_sql_server = pyodbc.connect(
-        f'''
-        DRIVER={sql_server};
-        Server={sql_server_name};
-        DATABASE={data_base_name};
-        Trusted_Connection=Yes;
-    ''')
+
+        f"DRIVER={sql_server};"
+        f"Server={sql_server_name};"
+        f"DATABASE={data_base_name};"
+        f"Trusted_Connection=Yes;"
+    )
 
     cursor = conn_sql_server.cursor()
     cursor.execute(
-        f'''
-        SELECT count([age on scale]), [type], [age on scale]
-        FROM [FISH_WORK].[dbo].[bioanalis$]
-        WHERE [type] LIKE '{bio_space}' AND [year] LIKE '{cur_year}' AND [major water body] LIKE '{water_body}'
-        GROUP BY [type], [age on scale]
-    ''')
+        f"SELECT count([age on scale]), [type], [age on scale]"
+        f"FROM [FISH_WORK].[dbo].[bioanalis$]"
+        f"WHERE [type] LIKE '{bio_space}' AND [year] LIKE '{cur_year}' AND [major water body] LIKE '{water_body}'"
+        f"GROUP BY [type], [age on scale]"
+    )
 
     results_occurrence_age = cursor.fetchall()
     conn_sql_server.close()
@@ -104,21 +103,20 @@ def get_water_place_for_space_from_sql(
 ):
     # считывание данных SQL базы из базы [FISH_WORK].[dbo].[bioanalis$]
     conn_sql_server = pyodbc.connect(
-        f'''
-        DRIVER={sql_server};
-        Server={sql_server_name};
-        DATABASE={data_base_name};
-        Trusted_Connection=Yes;
-    ''')
+
+        f"DRIVER={sql_server};"
+        f"Server={sql_server_name};"
+        f"DATABASE={data_base_name};"
+        f"Trusted_Connection=Yes;"
+    )
 
     cursor = conn_sql_server.cursor()
     cursor.execute(
-        f'''
-        SELECT [major water body]
-        FROM [FISH_WORK].[dbo].[bioanalis$]
-        WHERE [type] LIKE '{bio_space}' AND [year] LIKE '{cur_year}'
-        GROUP BY [major water body]
-    ''')
+        f"SELECT [major water body]"
+        f"FROM [FISH_WORK].[dbo].[bioanalis$]"
+        f"WHERE [type] LIKE '{bio_space}' AND [year] LIKE '{cur_year}'"
+        f"GROUP BY [major water body]"
+    )
     results_mater_body = cursor.fetchall()
     conn_sql_server.close()
     water_place = []
@@ -140,22 +138,19 @@ def save_age_struct_to_sql(
 ):
     # считывание данных SQL базы из базы [FISH_WORK].[dbo].[bioanalis$]
     conn_sql_server = pyodbc.connect(
-        f'''
-        DRIVER={sql_server};
-        Server={sql_server_name};
-        DATABASE={data_base_name};
-        Trusted_Connection=Yes;
-    ''')
+        f"DRIVER={sql_server};"
+        f"Server={sql_server_name};"
+        f"DATABASE={data_base_name};"
+        f"Trusted_Connection=Yes;"
+    )
 
     cursor = conn_sql_server.cursor()
 
     try:
         cursor.execute(
-            f'''
-            INSERT INTO age_struct
-            ([bio_space],[place],[year],[sample_size])
-            VALUES (?,?,?,?)
-        ''',
+            f"INSERT INTO age_struct"
+            f"([bio_space],[place],[year],[sample_size])"
+            f"VALUES (?,?,?,?)",
             (bio_space, water_body, cur_year, cur_sample_size)
         )
     except pyodbc.Error as err:
@@ -178,22 +173,17 @@ def save_age_percent_to_sql(
 ):
     # connecting to SQL base by podbc protocol
     conn_sql_server = pyodbc.connect(
-        f'''
-        DRIVER={sql_server};
-        Server={sql_server_name};
-        DATABASE={data_base_name};
-        Trusted_Connection=Yes;
-    ''')
+        f"DRIVER={sql_server};"
+        f"Server={sql_server_name};"
+        f"DATABASE={data_base_name};"
+        f"Trusted_Connection=Yes;)"
+    )
     cursor = conn_sql_server.cursor()
     cursor.execute(
         f'''
             SELECT age_struct_id
             FROM age_struct
-            WHERE [bio_space] LIKE '{bio_space}'
-            AND
-            [place] LIKE '{water_body}'
-            AND
-            [year] LIKE '{cur_year}'
+            WHERE [bio_space] LIKE '{bio_space}' AND [place] LIKE '{water_body}' AND [year] LIKE '{cur_year}'
             '''
     )
     results_ID = cursor.fetchall()
@@ -202,10 +192,8 @@ def save_age_percent_to_sql(
         cursor = conn_sql_server.cursor()
         try:
             cursor.execute(
-                f'''
-               INSERT INTO age_percent_table( [conformity_age_struct_id],[age_of_group],[percent_of_group] )
-                VALUES (?,?,?)
-            ''',
+                f"INSERT INTO age_percent_table( [conformity_age_struct_id],[age_of_group],[percent_of_group] )"
+                f"VALUES (?,?,?)",
                 (results_ID[0][0], list(df_age_count['age'])[i], list(df_age_count['percent'])[i])
             )
         except pyodbc.Error as err:
@@ -218,51 +206,53 @@ def save_age_percent_to_sql(
     return results_request
 
 def catch_history(
+        quota='15',
+        year='2020',
+        type_name_column='vbr',
+        develop_name_column='development/tonn',
+        table_name='Register$',
+        type_name_fish='хариус',
         sql_server: str = 'SQL Server',
         sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
         data_base_name: str = 'FISH_WORK'
 ):
 
-    quota = '15'
-    year = '2020'
-    type_name_column = 'vbr'
-    develop_name_column = 'development/tonn'
-    table_name = 'Register$'
-    type_name_fish = 'хариус'
-
-
     # connecting to SQL base by pyodbc protocol
     conn_sql_server = pyodbc.connect(
-        (f'DRIVER={sql_server};'
-         f'Server={sql_server_name};'
-         f'DATABASE={data_base_name};'
-         f'Trusted_Connection=Yes,'),
-
-        # f'''
-        #     DRIVER={sql_server};
-        #     Server={sql_server_name};
-        #     DATABASE={data_base_name};
-        #     Trusted_Connection=Yes,
-        # ''',
-        autocommit=True
+        f"DRIVER={sql_server};"
+        f"Server={sql_server_name};"
+        f"DATABASE={data_base_name};"
+        f"Trusted_Connection=Yes;"
     )
     cursor = conn_sql_server.cursor()
 
     cursor.execute(
-            f'''
-            SELECT [{type_name_column}], SUM([{develop_name_column}]) as develop
-            FROM [{table_name}]
-            WHERE {type_name_column} LIKE '{type_name_fish}'
-            GROUP BY {type_name_column}
-            '''
+            f"SELECT [{type_name_column}], SUM([{develop_name_column}]) as 'develop'"
+            f"FROM [{table_name}]"
+            f"WHERE {type_name_column} LIKE '{type_name_fish}'"
+            f"GROUP BY {type_name_column}"
     )
 
     history_from_register2020 = cursor.fetchall()
 
-    cursor.execute(
-        f'''
-            INSERT INTO catch_history(type, develop, quota, year) VALUES
-            ('{history_from_register2020[0][0]}', {history_from_register2020[0][1]}, {quota}, '{year}')
-    ''')
+    try:
+        cursor.execute(
+                f"INSERT INTO catch_history(type, develop, quota, year) VALUES"
+                f"('{history_from_register2020[0][0]}', {history_from_register2020[0][1]}, {quota}, '{year}')"
+        )
+        user_choice = input(
+                            f"Вид:   '{history_from_register2020[0][0]}'\n"
+                            f"Вылов: {history_from_register2020[0][1]}\n"
+                            f"Квота: {quota}\n"
+                            f"Год:   {year}\n"
+                            f"Добавить данные в таблицу 'catch_history'? (y/n)\n"
+                            )
+        if user_choice == 'y':
+            conn_sql_server.commit()
+            print('Данные сохранены')
+        else:
+            print('Данные не сохранены')
+    except:
+        print('Данные введены некорректно или таблицы не существует')
 
-    return None
+    return ''
