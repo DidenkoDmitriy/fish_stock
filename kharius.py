@@ -28,8 +28,8 @@ for el_watrer_body in current_water_places:
             cur_year=init_var.current_cur_year,
             water_body=el_watrer_body,
             cur_sample_size=sum(df_age_struct['count']),
-            sql_server_name='DESKTOP-6RLRC5B\SQLEXPRESS',
-            data_base_name='FISH_WORK'
+            sql_server_name=init_var.current_sql_server_name,
+            data_base_name=init_var.current_data_base_name
         )
     )
     print(
@@ -39,12 +39,7 @@ for el_watrer_body in current_water_places:
             bio_space=init_var.current_bio_space,
             cur_year=init_var.current_cur_year,
             water_body=el_watrer_body,
-            sql_server_name='DESKTOP-6RLRC5B\SQLEXPRESS',
-            data_base_name='FISH_WORK'
+            sql_server_name=init_var.current_sql_server_name,
+            data_base_name=init_var.current_data_base_name
         )
     )
-
-
-
-
-

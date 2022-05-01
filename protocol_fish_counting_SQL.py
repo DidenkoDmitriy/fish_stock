@@ -45,9 +45,10 @@ def get_age_struct_from_sql(
           'type': list_type,
           'age': list_age
      })
-    ### расчет возрастной структуры популяции
-    ## разделение значений из столбца [age on scale]
-    df = df[df['age'].notna()] # удаление None значений
+    # расчет возрастной структуры популяции
+    # разделение значений из столбца [age on scale]
+    # удаление None значений
+    df = df[df['age'].notna()]
     list_age_1 = []
     for el in df['age']:
         new_el = el.split('+')
@@ -55,7 +56,7 @@ def get_age_struct_from_sql(
             new_el.remove('')
         list_age_1.append(new_el)
 
-    ## Суммирование встречаемости возрастных групп
+    # Суммирование встречаемости возрастных групп
     list_age_2 = []
     for i in range(len(list_age_1)):
         for el in list_age_1[i]:
@@ -75,7 +76,7 @@ def get_age_struct_from_sql(
             'count': lst_age_count
     })
 
-    ## Создание итогового датафрейма
+    # Создание итогового датафрейма
     lst_age_value = []
     lst_age_count = []
     lst_age_perct = []
@@ -183,7 +184,6 @@ def save_age_percent_to_sql(
         DATABASE={data_base_name};
         Trusted_Connection=Yes;
     ''')
-    # geting ID from Table
     cursor = conn_sql_server.cursor()
     cursor.execute(
         f'''
@@ -206,7 +206,7 @@ def save_age_percent_to_sql(
                INSERT INTO age_percent_table( [conformity_age_struct_id],[age_of_group],[percent_of_group] )
                 VALUES (?,?,?)
             ''',
-                (results_ID[0][0],list(df_age_count['age'])[i], list(df_age_count['percent'])[i])
+                (results_ID[0][0], list(df_age_count['age'])[i], list(df_age_count['percent'])[i])
             )
         except pyodbc.Error as err:
             results_request = "Ошибка:"+str(err)
@@ -217,4 +217,52 @@ def save_age_percent_to_sql(
     conn_sql_server.close()
     return results_request
 
+def catch_history(
+        sql_server: str = 'SQL Server',
+        sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
+        data_base_name: str = 'FISH_WORK'
+):
 
+    quota = '15'
+    year = '2020'
+    type_name_column = 'vbr'
+    develop_name_column = 'development/tonn'
+    table_name = 'Register$'
+    type_name_fish = 'хариус'
+
+
+    # connecting to SQL base by pyodbc protocol
+    conn_sql_server = pyodbc.connect(
+        (f'DRIVER={sql_server};'
+         f'Server={sql_server_name};'
+         f'DATABASE={data_base_name};'
+         f'Trusted_Connection=Yes,'),
+
+        # f'''
+        #     DRIVER={sql_server};
+        #     Server={sql_server_name};
+        #     DATABASE={data_base_name};
+        #     Trusted_Connection=Yes,
+        # ''',
+        autocommit=True
+    )
+    cursor = conn_sql_server.cursor()
+
+    cursor.execute(
+            f'''
+            SELECT [{type_name_column}], SUM([{develop_name_column}]) as develop
+            FROM [{table_name}]
+            WHERE {type_name_column} LIKE '{type_name_fish}'
+            GROUP BY {type_name_column}
+            '''
+    )
+
+    history_from_register2020 = cursor.fetchall()
+
+    cursor.execute(
+        f'''
+            INSERT INTO catch_history(type, develop, quota, year) VALUES
+            ('{history_from_register2020[0][0]}', {history_from_register2020[0][1]}, {quota}, '{year}')
+    ''')
+
+    return None
