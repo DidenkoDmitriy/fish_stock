@@ -252,7 +252,90 @@ def catch_history(
             print('Данные сохранены')
         else:
             print('Данные не сохранены')
-    except:
-        print('Данные введены некорректно или таблицы не существует')
+    except pyodbc.Error as err:
+        print('Ошибка: ' + str(err))
+
+    cursor.execute(
+        '''
+        Delete FROM catch_history
+        Where id not in
+        (
+        select min(id) as MinRowID
+        FROM catch_history
+        group by type, develop, quota, year
+        )
+        '''
+        )
+
+    conn_sql_server.commit()
 
     return ''
+
+
+# переменную major_water_body в будущем планирую брать из sql таблицы с помощью SELECT DISTINCT
+# и проитерировать всю функцию по ней
+
+def places_of_fishing_compliance(
+        major_water_body: str = 'Бассейн реки Амур',
+        sql_server: str = 'SQL Server',
+        sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
+        data_base_name: str = 'FISH_WORK'
+):
+
+    # connecting to SQL base by pyodbc protocol
+    conn_sql_server = pyodbc.connect(
+        f"DRIVER={sql_server};"
+        f"Server={sql_server_name};"
+        f"DATABASE={data_base_name};"
+        f"Trusted_Connection=Yes;"
+    )
+    cursor = conn_sql_server.cursor()
+
+    cursor.execute(
+        '''
+        f"SELECT DISTINCT [water body]"
+        f"FROM bioanalis$"
+        f"WHERE [water body] IS NOT NULL"
+        '''
+    )
+
+    results_sql_distinct = cursor.fetchall()
+
+    water_places_list = []
+    major_water_please_list = []
+    for el in results_sql_distinct:
+        water_places_list.append(el)
+        major_water_please_list.append(f'{major_water_body}')
+
+    df_water_places = pd.DataFrame({
+        'PromArea': major_water_please_list,
+        'WaterPleases': water_places_list
+    })
+
+    for st in range(len(list(df_water_places['PromArea']))):
+        try:
+            cursor.execute(
+            f"INSERT INTO places_of_fishing"
+            f"([PromArea], [WaterPleases])"
+            f"VALUES (?,?)",
+            (list(df_water_places['PromArea'])[st], list(df_water_places['WaterPleases'])[st][0])
+            )
+
+        except pyodbc.Error as err:
+            print('Ошибка: ' + str(err))
+
+    conn_sql_server.commit()
+
+    cursor.execute(
+        '''
+        Delete FROM places_of_fishing
+        Where id not in
+        (
+        select min(id) as MinRowID
+        FROM places_of_fishing
+        group by [PromArea], [WaterPleases]
+        )
+        '''
+    )
+
+    conn_sql_server.commit()

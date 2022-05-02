@@ -9,8 +9,12 @@ current_data_base_name = 'FISH_WORK'
 # настройка функции catch_history
 
 quota = '15'
-year = '2020'
+year = '2021'
 type_name_column = 'vbr'
 develop_name_column = 'development/tonn'
 table_name = 'Register$'
 type_name_fish = 'хариус'
+
+# функция places_of_fishing_compliance
+
+major_water_body = 'Бассейн реки Амур'
