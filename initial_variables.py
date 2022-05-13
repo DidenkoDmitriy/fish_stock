@@ -1,10 +1,13 @@
 import socket as s
 
 current_sql_server = 'SQL Server'
-current_bio_space = 'хариус нижнеамурский'
+current_bio_space = 'хариус желтопятнистый'
 current_cur_year = '2021'
 current_sql_server_name = s.gethostname()
 current_data_base_name = 'FISH_WORK'
+
+if current_sql_server_name == 'DESKTOP-6RLRC5B':
+    current_sql_server_name = 'DESKTOP-6RLRC5B\SQLEXPRESS'
 
 # настройка функции catch_history
 

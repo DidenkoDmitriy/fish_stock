@@ -20,6 +20,7 @@ for el_watrer_body in current_water_places:
             sql_server_name=init_var.current_sql_server_name,
             data_base_name=init_var.current_data_base_name
         )
+    print(str(el_watrer_body)+' '+str(init_var.current_cur_year))
     print(df_age_struct)
     print(
         fc.save_age_struct_to_sql(

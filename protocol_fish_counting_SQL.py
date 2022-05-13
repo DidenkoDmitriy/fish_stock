@@ -10,17 +10,15 @@ def get_age_struct_from_sql(
         sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
         data_base_name: str = 'FISH_WORK'
         ):
-    
     # Reading data from SQL base [FISH_WORK].[dbo].[bioanalis$]
-    # Подключение к SQL серверу
     conn_sql_server = pyodbc.connect(
+
         f"DRIVER={sql_server};"
         f"Server={sql_server_name};"
         f"DATABASE={data_base_name};"
         f"Trusted_Connection=Yes;"
     )
-    
-    # Получаем объект с данными возрасной структуры вида bio_spaсe в году cur_year и в водоеме water_body
+
     cursor = conn_sql_server.cursor()
     cursor.execute(
         f"SELECT count([age on scale]), [type], [age on scale]"
@@ -29,7 +27,6 @@ def get_age_struct_from_sql(
         f"GROUP BY [type], [age on scale]"
     )
 
-    # Получаем данные из запроса в виде списка кортежей в переменную results_occurrence_age
     results_occurrence_age = cursor.fetchall()
     conn_sql_server.close()
 
@@ -53,18 +50,16 @@ def get_age_struct_from_sql(
     df = df[df['age'].notna()]
     list_age_1 = []
     for el in df['age']:
-        # Разделяет строку по знакам "+" 
         new_el = el.split('+')
-        # Удаляет из полученного списка пустые элементы
         while new_el.count('') > 0:
             new_el.remove('')
         list_age_1.append(new_el)
 
     # Суммирование встречаемости возрастных групп
-    division_spited_age_list = []
+    list_age_2 = []
     for i in range(len(list_age_1)):
         for el in list_age_1[i]:
-            division_spited_age_list.append(
+            list_age_2.append(
                 [
                     el,
                     list(df['count'])[i] / len(list_age_1[i])
@@ -72,8 +67,7 @@ def get_age_struct_from_sql(
             )
     lst_age_value = []
     lst_age_count = []
-
-    for el in division_spited_age_list:
+    for el in list_age_2:
         lst_age_value.append(int(el[0]))
         lst_age_count.append(el[1])
     df_age_count = pd.DataFrame({
@@ -168,7 +162,6 @@ def save_age_struct_to_sql(
     conn_sql_server.close()
     return results_request
 
-
 def save_age_percent_to_sql(
         df_age_count: pd.DataFrame,
         sql_server: str = 'SQL Server',
@@ -211,7 +204,6 @@ def save_age_percent_to_sql(
         conn_sql_server.commit()
     conn_sql_server.close()
     return results_request
-
 
 def catch_history(
         quota='15',
@@ -301,9 +293,9 @@ def places_of_fishing_compliance(
 
     cursor.execute(
         '''
-        SELECT DISTINCT [major water body]
-        FROM bioanalis$
-        WHERE [major water body] IS NOT NULL
+        f"SELECT DISTINCT [water body]"
+        f"FROM bioanalis$"
+        f"WHERE [water body] IS NOT NULL"
         '''
     )
 
