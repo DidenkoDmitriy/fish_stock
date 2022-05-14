@@ -15,11 +15,19 @@ class MainWindow(QMainWindow):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
 
-        txt_SQL_base_name = init_var.current_data_base_name
-        self.ui.label_Text_SQL_Base.setText(txt_SQL_base_name)
 
-        txt_Table_name = init_var.table_name
-        self.ui.label_Text_Table_Name.setText(txt_Table_name)
+        self.ui.label_Text_SQL_Base.setText(init_var.current_data_base_name)
+        self.ui.label_Text_Table_Name.setText(init_var.table_name)
+        self.ui.label_Text_Space.setText(init_var.current_bio_space)
+        self.ui.label_Text_Year.setText(init_var.current_cur_year)
+        # current_water_places = fc.get_water_place_for_space_from_sql(
+        #     sql_server=init_var.current_sql_server,
+        #     bio_space=init_var.current_bio_space,
+        #     cur_year=init_var.current_cur_year,
+        #     sql_server_name=init_var.current_sql_server_name,
+        #     data_base_name=init_var.current_data_base_name
+        # )
+        # self.ui.comboBox.insertItems(self,current_water_places)
 
 if __name__ == '__main__':
     app = QApplication()
