@@ -6,347 +6,496 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1136</width>
-    <height>600</height>
+    <width>1160</width>
+    <height>861</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>30</y>
-      <width>931</width>
-      <height>461</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="tab_SQL_Base_connect">
-     <attribute name="title">
-      <string>SQL DB</string>
-     </attribute>
-     <widget class="QPushButton" name="btn_Connect_SQL_DB">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>150</y>
-        <width>131</width>
-        <height>51</height>
-       </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="age_structure_calculation">
+      <property name="currentIndex">
+       <number>1</number>
       </property>
-      <property name="text">
-       <string>Connect</string>
-      </property>
+      <widget class="QWidget" name="tab_SQL_Base_connect">
+       <attribute name="title">
+        <string>SQL DB</string>
+       </attribute>
+       <widget class="QPushButton" name="btn_Connect_SQL_DB">
+        <property name="geometry">
+         <rect>
+          <x>149</x>
+          <y>213</y>
+          <width>591</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Connect</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_Text_SQL_Server_Name">
+        <property name="geometry">
+         <rect>
+          <x>149</x>
+          <y>155</y>
+          <width>591</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 247, 247);</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_Text_SQL_Base">
+        <property name="geometry">
+         <rect>
+          <x>149</x>
+          <y>97</y>
+          <width>591</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 247, 247);</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_Table_Name">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>155</y>
+          <width>131</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(85, 170, 255);</string>
+        </property>
+        <property name="text">
+         <string>Table Name</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_SQL_Base_Name_2">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>97</y>
+          <width>131</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(85, 170, 255);</string>
+        </property>
+        <property name="text">
+         <string>Server Name</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_SQL_Base_Name">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>39</y>
+          <width>131</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(85, 170, 255);</string>
+        </property>
+        <property name="text">
+         <string>SQL DB</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_Text_Table_Name">
+        <property name="geometry">
+         <rect>
+          <x>149</x>
+          <y>39</y>
+          <width>591</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 247, 247);</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Выбор вида</string>
+       </attribute>
+       <widget class="QLabel" name="label_Space_Name">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>150</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(85, 170, 255);</string>
+        </property>
+        <property name="text">
+         <string>ВИД ВБР</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_Text_Space">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>20</y>
+          <width>591</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 247, 247);</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_Year">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>80</y>
+          <width>151</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(85, 170, 255);</string>
+        </property>
+        <property name="text">
+         <string>Год</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_Text_Year">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>80</y>
+          <width>591</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(247, 247, 247);</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_Connect_SQL_DB_2">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>140</y>
+          <width>591</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Connect</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Расчет возрастной структуры</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>30</y>
+          <width>211</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLabel" name="lbl_tab_age_struct_table_list">
+           <property name="font">
+            <font>
+             <underline>false</underline>
+             <strikeout>false</strikeout>
+            </font>
+           </property>
+           <property name="text">
+            <string>Выберите таблицу биоанализа</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="lbl_tab_age_struct_table_list_comboBox"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="gridLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>30</y>
+          <width>160</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="1">
+          <widget class="QComboBox" name="lbl_tab_age_struct_type_list_comboBox"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lbl_tab_age_struct_type_list">
+           <property name="text">
+            <string>Виды</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lbl_tab_age_struct_year_list">
+           <property name="text">
+            <string>Года</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="lbl_tab_age_struct_year_list_comboBox"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>540</x>
+          <y>20</y>
+          <width>160</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="lbl_tab_age_struct_area_list">
+           <property name="text">
+            <string>Места лова</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="lbl_tab_age_struct_area_list_comboBox"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>140</y>
+          <width>207</width>
+          <height>141</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="lbl_export_age_structure_calculation_to_sql">
+           <property name="text">
+            <string>Выберите таблицу ... для экспорта</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="lbl_export_age_structure_calculation_to_sql_comboBox"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QTextEdit" name="textEdit_age_structure_calculation_for_print_dataframe">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>140</y>
+          <width>631</width>
+          <height>461</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="button_age_structure_calculation_print_results">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>600</y>
+          <width>631</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Вывести результаты расчетов</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="button_age_structure_calculation_save_results">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>650</y>
+          <width>631</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Экпортировать в sql</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Пром. статистика</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Био показатели</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>Пром.районы</string>
+       </attribute>
+      </widget>
      </widget>
-     <widget class="QLabel" name="label_SQL_Base_Name_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>165</width>
-        <height>59</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(85, 170, 255);</string>
-      </property>
-      <property name="text">
-       <string>Server Name</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Text_SQL_Server_Name">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>10</y>
-        <width>521</width>
-        <height>59</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(247, 247, 247);</string>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_SQL_Base_Name">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>161</width>
-        <height>59</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(85, 170, 255);</string>
-      </property>
-      <property name="text">
-       <string>SQL DB</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Text_SQL_Base">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>80</y>
-        <width>521</width>
-        <height>59</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(247, 247, 247);</string>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Table_Name">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>150</y>
-        <width>150</width>
-        <height>50</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(85, 170, 255);</string>
-      </property>
-      <property name="text">
-       <string>Table Name</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Text_Table_Name">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>150</y>
-        <width>300</width>
-        <height>50</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(247, 247, 247);</string>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>Выбор вида</string>
-     </attribute>
-     <widget class="QLabel" name="label_Space_Name">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>150</width>
-        <height>50</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(85, 170, 255);</string>
-      </property>
-      <property name="text">
-       <string>ВИД ВБР</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Text_Space">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>20</y>
-        <width>300</width>
-        <height>50</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(247, 247, 247);</string>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Year">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(85, 170, 255);</string>
-      </property>
-      <property name="text">
-       <string>Год</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_Text_Year">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>80</y>
-        <width>100</width>
-        <height>50</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(247, 247, 247);</string>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string>Пром. статистика</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>Расчет возрастной структуры</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Био показатели</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_5">
-     <attribute name="title">
-      <string>Пром.районы</string>
-     </attribute>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1136</width>
+     <width>1160</width>
      <height>26</height>
     </rect>
    </property>
