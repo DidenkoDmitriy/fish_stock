@@ -6,13 +6,13 @@ import protocol_fish_counting_SQL as fc
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-from ui_form import Ui_Dialog
+from ui_form import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.ui = Ui_Dialog()
+        self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
 
