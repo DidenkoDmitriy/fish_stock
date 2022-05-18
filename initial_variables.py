@@ -1,4 +1,5 @@
 import socket as s
+import tmp_connection as tmp
 
 current_sql_server = 'SQL Server'
 current_bio_space = 'хариус желтопятнистый'
