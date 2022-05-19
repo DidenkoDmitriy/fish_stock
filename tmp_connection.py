@@ -1,5 +1,5 @@
 import sys
-import initial_variables as init_var
+import socket as s
 import protocol_fish_counting_SQL as fc
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_form import Ui_MainWindow
@@ -10,21 +10,55 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.connection()
+        self.age_structure_calculation()
 
     def connection(self):
         self.ui.label_SQL_Name.setText('SQL Name')
         self.ui.label_SQL_Server_Name.setText('SQL Server Name')
         self.ui.label_DB_Name.setText('DB Name')
-        self.ui.btn_Connect_SQL_DB.clicked.connect(self.line_input)
+
+        self.ui.lineEdit_SQL_Name.setText('SQL Server')
+        self.ui.lineEdit_SQL_Server_Name.setText(s.gethostname())
+        self.ui.lineEdit_DB_Name.setText('FISH_WORK')
+
+        self.ui.btn_Connect_SQL_DB.clicked.connect(self.connection_line_input)
 
 
-    def line_input(self):
+    def connection_line_input(self):
+        self.dict_sql_settings['current_sql_server'] = self.ui.lineEdit_SQL_Name.text()
+        self.dict_sql_settings['current_sql_server_name'] = self.ui.lineEdit_SQL_Server_Name.text()
+        self.dict_sql_settings['current_data_base_name'] = self.ui.lineEdit_DB_Name.text()
+        self.dict_sql_settings['current_bioanalis_table'] = self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()
 
-        self.sql_name = self.ui.lineEdit_SQL_Name.text()
-        self.sql_server_name = self.ui.lineEdit_SQL_Server_Name.text()
-        self.db_name = self.ui.lineEdit_DB_Name.text()
-        self.ui.label_print_widjet.setText(f'{self.sql_name}\n{self.sql_server_name}\n{self.db_name}')
+        self.save_dict_file()
 
+    def age_structure_calculation(self):
+        self.ui.comboBox_tab_sql_bioanalis_table_list.addItems(fc.age_structure_calculation())
+        self.ui.pushButton_sql_bioanalis_choose_table.clicked.connect(self.push_button_age_struct_choose_table)
+
+
+    def push_button_age_struct_choose_table(self):
+        self.dict_sql_settings['current_bioanalis_table'] = self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()
+
+        self.save_dict_file()
+
+
+
+    dict_sql_settings = {
+        'current_sql_server': "SQL Server",
+        'current_sql_server_name': "LAPTOP-E5Q4G2L1",
+        'current_data_base_name': "FISH_WORK",
+        'current_bioanalis_table': "bioanalis$"
+    }
+
+    def save_dict_file(self):
+        file = open("connection_settings.py", "w")
+        file.write(f'current_sql_server = "{self.dict_sql_settings["current_sql_server"]}"\n'
+                   f'current_sql_server_name = "{self.dict_sql_settings["current_sql_server_name"]}"\n'
+                   f'current_data_base_name = "{self.dict_sql_settings["current_data_base_name"]}"\n'
+                   f'current_bioanalis_table = "{self.dict_sql_settings["current_bioanalis_table"]}"\n'
+                   )
+        file.close()
 
 if __name__ == '__main__':
     app = QApplication()

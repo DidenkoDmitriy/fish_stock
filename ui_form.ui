@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="age_structure_calculation">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_SQL_Base_connect">
        <attribute name="title">
@@ -148,162 +148,18 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLabel" name="label_print_widjet">
+       <widget class="QWidget" name="verticalLayoutWidget_6">
         <property name="geometry">
          <rect>
-          <x>750</x>
-          <y>40</y>
-          <width>301</width>
-          <height>201</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Выбор вида</string>
-       </attribute>
-       <widget class="QLabel" name="label_Space_Name">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>150</width>
-          <height>50</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(85, 170, 255);</string>
-        </property>
-        <property name="text">
-         <string>ВИД ВБР</string>
-        </property>
-        <property name="margin">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_Text_Space">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>20</y>
-          <width>591</width>
-          <height>50</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>16</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(247, 247, 247);</string>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="margin">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_Year">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>80</y>
-          <width>151</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(85, 170, 255);</string>
-        </property>
-        <property name="text">
-         <string>Год</string>
-        </property>
-        <property name="margin">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_Text_Year">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>80</y>
-          <width>591</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>16</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(247, 247, 247);</string>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="margin">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="btn_Connect_SQL_DB_2">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>140</y>
-          <width>591</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Connect</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>Расчет возрастной структуры</string>
-       </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>30</y>
+          <x>190</x>
+          <y>300</y>
           <width>211</width>
-          <height>80</height>
+          <height>82</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <widget class="QLabel" name="lbl_tab_age_struct_table_list">
+          <widget class="QLabel" name="label_tab_sql_bioanalis_table_list">
            <property name="font">
             <font>
              <underline>false</underline>
@@ -316,54 +172,34 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_tab_age_struct_table_list"/>
+          <widget class="QComboBox" name="comboBox_tab_sql_bioanalis_table_list"/>
          </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="gridLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>330</x>
-          <y>30</y>
-          <width>160</width>
-          <height>80</height>
-         </rect>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox_tab_age_struct_type_list"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="lbl_tab_age_struct_type_list">
+         <item>
+          <widget class="QPushButton" name="pushButton_sql_bioanalis_choose_table">
            <property name="text">
-            <string>Виды</string>
+            <string>choose table</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lbl_tab_age_struct_year_list">
-           <property name="text">
-            <string>Года</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_tab_age_struct_year_list"/>
-         </item>
         </layout>
        </widget>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Расчет возрастной структуры</string>
+       </attribute>
        <widget class="QWidget" name="verticalLayoutWidget_2">
         <property name="geometry">
          <rect>
-          <x>540</x>
-          <y>20</y>
+          <x>720</x>
+          <y>30</y>
           <width>160</width>
           <height>80</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QLabel" name="lbl_tab_age_struct_area_list">
+          <widget class="QLabel" name="label_tab_age_struct_area_list">
            <property name="text">
             <string>Места лова</string>
            </property>
@@ -377,8 +213,8 @@
        <widget class="QWidget" name="verticalLayoutWidget_3">
         <property name="geometry">
          <rect>
-          <x>40</x>
-          <y>140</y>
+          <x>220</x>
+          <y>580</y>
           <width>207</width>
           <height>141</height>
          </rect>
@@ -399,8 +235,8 @@
        <widget class="QTextEdit" name="textEdit_age_structure_calculation_for_print_dataframe">
         <property name="geometry">
          <rect>
-          <x>270</x>
-          <y>140</y>
+          <x>460</x>
+          <y>170</y>
           <width>631</width>
           <height>461</height>
          </rect>
@@ -409,8 +245,8 @@
        <widget class="QPushButton" name="button_age_structure_calculation_print_results">
         <property name="geometry">
          <rect>
-          <x>270</x>
-          <y>600</y>
+          <x>460</x>
+          <y>630</y>
           <width>631</width>
           <height>51</height>
          </rect>
@@ -422,8 +258,8 @@
        <widget class="QPushButton" name="button_age_structure_calculation_save_results">
         <property name="geometry">
          <rect>
-          <x>270</x>
-          <y>650</y>
+          <x>460</x>
+          <y>680</y>
           <width>631</width>
           <height>51</height>
          </rect>
@@ -431,6 +267,50 @@
         <property name="text">
          <string>Экпортировать в sql</string>
         </property>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>30</y>
+          <width>160</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLabel" name="label_tab_age_struct_type_list">
+           <property name="text">
+            <string>Виды</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_tab_age_struct_type_list"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget_5">
+        <property name="geometry">
+         <rect>
+          <x>550</x>
+          <y>30</y>
+          <width>160</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_tab_age_struct_year_list">
+           <property name="text">
+            <string>Года</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_tab_age_struct_year_list"/>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_4">

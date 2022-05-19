@@ -1,13 +1,15 @@
 import pyodbc
 import pandas as pd
 import socket as s
+import connection_settings as cs
 
 # Функция подключения к базе данных
 
 def connection_to_db(
-    sql_server: str = 'SQL Server',
-    sql_server_name: str = s.gethostname(),
-    data_base_name: str = 'FISH_WORK'
+        sql_server: str = 'SQL Server',
+        sql_server_name: str = s.gethostname(),
+        data_base_name: str = 'FISH_WORK',
+        autocommit=True
 ):
     conn_sql_server = pyodbc.connect(
         f"DRIVER={sql_server};"
@@ -15,8 +17,8 @@ def connection_to_db(
         f"DATABASE={data_base_name};"
         f"Trusted_Connection=Yes;"
     )
-    return conn_sql_server
 
+    return conn_sql_server.cursor()
 
 # Getting age occurrence from SQL base
 def get_age_struct_from_sql(
@@ -294,25 +296,15 @@ def catch_history(
 
 def places_of_fishing_compliance(
         major_water_body: str = 'Бассейн реки Амур',
-        sql_server: str = 'SQL Server',
-        sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
-        data_base_name: str = 'FISH_WORK'
 ):
 
-    # connecting to SQL base by pyodbc protocol
-    conn_sql_server = pyodbc.connect(
-        f"DRIVER={sql_server};"
-        f"Server={sql_server_name};"
-        f"DATABASE={data_base_name};"
-        f"Trusted_Connection=Yes;"
-    )
-    cursor = conn_sql_server.cursor()
+    cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
 
     cursor.execute(
         '''
-        f"SELECT DISTINCT [water body]"
-        f"FROM bioanalis$"
-        f"WHERE [water body] IS NOT NULL"
+        SELECT DISTINCT [water body]
+        FROM bioanalis$
+        WHERE [water body] IS NOT NULL
         '''
     )
 
@@ -332,17 +324,14 @@ def places_of_fishing_compliance(
     for st in range(len(list(df_water_places['PromArea']))):
         try:
             cursor.execute(
-            f"INSERT INTO places_of_fishing"
-            f"([PromArea], [WaterPleases])"
-            f"VALUES (?,?)",
-            (list(df_water_places['PromArea'])[st], list(df_water_places['WaterPleases'])[st][0])
+                f"INSERT INTO places_of_fishing"
+                f"([PromArea], [WaterPleases])"
+                f"VALUES (?,?)",
+                (list(df_water_places['PromArea'])[st], list(df_water_places['WaterPleases'])[st][0])
             )
 
         except pyodbc.Error as err:
             print('Ошибка: ' + str(err))
-
-    conn_sql_server.commit()
-
     cursor.execute(
         '''
         Delete FROM places_of_fishing
@@ -355,4 +344,15 @@ def places_of_fishing_compliance(
         '''
     )
 
-    conn_sql_server.commit()
+def age_structure_calculation():
+
+    cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
+
+    cursor.execute("SELECT [name] FROM sys.objects WHERE type in (N'U')")
+
+    tuple_list_of_database_tables = cursor.fetchall()
+    list_of_database_tables = []
+    for table in tuple_list_of_database_tables:
+        list_of_database_tables.append(table[0])
+
+    return list_of_database_tables
