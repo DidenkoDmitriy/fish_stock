@@ -10,6 +10,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.connection()
+        self.ui.btn_DisConnect_SQL_DB.clicked.connect(self.pushing_disconnecting_button)
 
     def connection(self):
         self.ui.label_SQL_Name.setText('SQL Name')
@@ -29,18 +30,28 @@ class MainWindow(QMainWindow):
 
         self.ui.btn_Connect_SQL_DB.setEnabled(False)
         self.ui.btn_DisConnect_SQL_DB.setEnabled(True)
-
-
         self.ui.lineEdit_SQL_Name.setEnabled(False)
         self.ui.lineEdit_SQL_Server_Name.setEnabled(False)
         self.ui.lineEdit_DB_Name.setEnabled(False)
         self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
-
         self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(True)
 
         self.set_tables()
-
         self.save_dict_file()
+
+    def pushing_disconnecting_button(self):
+        self.ui.btn_Connect_SQL_DB.setEnabled(True)
+        self.ui.btn_DisConnect_SQL_DB.setEnabled(False)
+        
+        self.ui.lineEdit_SQL_Name.setEnabled(True)
+        self.ui.lineEdit_SQL_Server_Name.setEnabled(True)
+        self.ui.lineEdit_DB_Name.setEnabled(True)
+        self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(True)
+        self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
+        self.ui.pushButton_sql_bioanalis_choose_table.setEnabled(False)
+
+
+        
 
 
     def set_tables(self):
@@ -55,6 +66,11 @@ class MainWindow(QMainWindow):
     def push_button_age_struct_choose_table(self):
         self.dict_sql_settings['current_bioanalis_table'] = self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()
         self.save_dict_file()
+        self.ui.comboBox_tab_age_struct_type_list.setEnabled(True)
+
+
+        fc.get_list_from_sql("SELECT [name] FROM sys.objects WHERE type in (N'U')")
+
 
 
     dict_sql_settings = {
