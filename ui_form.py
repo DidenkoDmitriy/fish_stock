@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QLabel,
-    QLineEdit, QMainWindow, QMenuBar, QPushButton,
-    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QHBoxLayout,
+    QLabel, QLineEdit, QMainWindow, QMenuBar,
+    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+    QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -33,9 +33,6 @@ class Ui_MainWindow(object):
         self.age_structure_calculation.setObjectName(u"age_structure_calculation")
         self.tab_SQL_Base_connect = QWidget()
         self.tab_SQL_Base_connect.setObjectName(u"tab_SQL_Base_connect")
-        self.btn_Connect_SQL_DB = QPushButton(self.tab_SQL_Base_connect)
-        self.btn_Connect_SQL_DB.setObjectName(u"btn_Connect_SQL_DB")
-        self.btn_Connect_SQL_DB.setGeometry(QRect(150, 220, 591, 28))
         self.label_DB_Name = QLabel(self.tab_SQL_Base_connect)
         self.label_DB_Name.setObjectName(u"label_DB_Name")
         self.label_DB_Name.setGeometry(QRect(11, 155, 131, 51))
@@ -84,13 +81,32 @@ class Ui_MainWindow(object):
 
         self.comboBox_tab_sql_bioanalis_table_list = QComboBox(self.verticalLayoutWidget_6)
         self.comboBox_tab_sql_bioanalis_table_list.setObjectName(u"comboBox_tab_sql_bioanalis_table_list")
+        self.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
 
         self.verticalLayout_6.addWidget(self.comboBox_tab_sql_bioanalis_table_list)
 
         self.pushButton_sql_bioanalis_choose_table = QPushButton(self.verticalLayoutWidget_6)
         self.pushButton_sql_bioanalis_choose_table.setObjectName(u"pushButton_sql_bioanalis_choose_table")
+        self.pushButton_sql_bioanalis_choose_table.setEnabled(False)
 
         self.verticalLayout_6.addWidget(self.pushButton_sql_bioanalis_choose_table)
+
+        self.horizontalLayoutWidget = QWidget(self.tab_SQL_Base_connect)
+        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
+        self.horizontalLayoutWidget.setGeometry(QRect(150, 220, 371, 41))
+        self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.btn_Connect_SQL_DB = QPushButton(self.horizontalLayoutWidget)
+        self.btn_Connect_SQL_DB.setObjectName(u"btn_Connect_SQL_DB")
+
+        self.horizontalLayout.addWidget(self.btn_Connect_SQL_DB)
+
+        self.btn_DisConnect_SQL_DB = QPushButton(self.horizontalLayoutWidget)
+        self.btn_DisConnect_SQL_DB.setObjectName(u"btn_DisConnect_SQL_DB")
+        self.btn_DisConnect_SQL_DB.setEnabled(False)
+
+        self.horizontalLayout.addWidget(self.btn_DisConnect_SQL_DB)
 
         self.age_structure_calculation.addTab(self.tab_SQL_Base_connect, "")
         self.tab_3 = QWidget()
@@ -108,6 +124,7 @@ class Ui_MainWindow(object):
 
         self.comboBox_tab_age_struct_area_list = QComboBox(self.verticalLayoutWidget_2)
         self.comboBox_tab_age_struct_area_list.setObjectName(u"comboBox_tab_age_struct_area_list")
+        self.comboBox_tab_age_struct_area_list.setEnabled(False)
 
         self.verticalLayout_3.addWidget(self.comboBox_tab_age_struct_area_list)
 
@@ -149,6 +166,7 @@ class Ui_MainWindow(object):
 
         self.comboBox_tab_age_struct_type_list = QComboBox(self.verticalLayoutWidget_4)
         self.comboBox_tab_age_struct_type_list.setObjectName(u"comboBox_tab_age_struct_type_list")
+        self.comboBox_tab_age_struct_type_list.setEnabled(False)
 
         self.verticalLayout.addWidget(self.comboBox_tab_age_struct_type_list)
 
@@ -165,6 +183,7 @@ class Ui_MainWindow(object):
 
         self.comboBox_tab_age_struct_year_list = QComboBox(self.verticalLayoutWidget_5)
         self.comboBox_tab_age_struct_year_list.setObjectName(u"comboBox_tab_age_struct_year_list")
+        self.comboBox_tab_age_struct_year_list.setEnabled(False)
 
         self.verticalLayout_5.addWidget(self.comboBox_tab_age_struct_year_list)
 
@@ -179,7 +198,7 @@ class Ui_MainWindow(object):
         self.tab_5.setObjectName(u"tab_5")
         self.age_structure_calculation.addTab(self.tab_5, "")
 
-        self.gridLayout.addWidget(self.age_structure_calculation, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.age_structure_calculation, 0, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -200,12 +219,13 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.btn_Connect_SQL_DB.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
         self.label_DB_Name.setText(QCoreApplication.translate("MainWindow", u"DB Name", None))
         self.label_SQL_Server_Name.setText(QCoreApplication.translate("MainWindow", u"Server Name", None))
         self.label_SQL_Name.setText(QCoreApplication.translate("MainWindow", u"SQL Server", None))
         self.label_tab_sql_bioanalis_table_list.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 \u0431\u0438\u043e\u0430\u043d\u0430\u043b\u0438\u0437\u0430", None))
         self.pushButton_sql_bioanalis_choose_table.setText(QCoreApplication.translate("MainWindow", u"choose table", None))
+        self.btn_Connect_SQL_DB.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
+        self.btn_DisConnect_SQL_DB.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_SQL_Base_connect), QCoreApplication.translate("MainWindow", u"SQL DB", None))
         self.label_tab_age_struct_area_list.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u0441\u0442\u0430 \u043b\u043e\u0432\u0430", None))
         self.lbl_export_age_structure_calculation_to_sql.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 ... \u0434\u043b\u044f \u044d\u043a\u0441\u043f\u043e\u0440\u0442\u0430", None))

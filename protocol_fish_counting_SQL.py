@@ -344,15 +344,11 @@ def places_of_fishing_compliance(
         '''
     )
 
-def age_structure_calculation():
-
+def get_list_from_sql(cur_query):
     cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
-
-    cursor.execute("SELECT [name] FROM sys.objects WHERE type in (N'U')")
-
+    cursor.execute(cur_query)
     tuple_list_of_database_tables = cursor.fetchall()
     list_of_database_tables = []
     for table in tuple_list_of_database_tables:
         list_of_database_tables.append(table[0])
-
     return list_of_database_tables
