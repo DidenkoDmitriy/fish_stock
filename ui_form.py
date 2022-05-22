@@ -69,7 +69,7 @@ class Ui_MainWindow(object):
         self.lineEdit_DB_Name.setGeometry(QRect(150, 160, 591, 51))
         self.verticalLayoutWidget_6 = QWidget(self.tab_SQL_Base_connect)
         self.verticalLayoutWidget_6.setObjectName(u"verticalLayoutWidget_6")
-        self.verticalLayoutWidget_6.setGeometry(QRect(20, 270, 361, 82))
+        self.verticalLayoutWidget_6.setGeometry(QRect(20, 260, 361, 82))
         self.verticalLayout_6 = QVBoxLayout(self.verticalLayoutWidget_6)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
@@ -84,16 +84,19 @@ class Ui_MainWindow(object):
 
         self.comboBox_tab_sql_bioanalis_table_list = QComboBox(self.verticalLayoutWidget_6)
         self.comboBox_tab_sql_bioanalis_table_list.setObjectName(u"comboBox_tab_sql_bioanalis_table_list")
+        self.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
 
         self.verticalLayout_6.addWidget(self.comboBox_tab_sql_bioanalis_table_list)
 
         self.pushButton_sql_bioanalis_choose_table = QPushButton(self.verticalLayoutWidget_6)
         self.pushButton_sql_bioanalis_choose_table.setObjectName(u"pushButton_sql_bioanalis_choose_table")
+        self.pushButton_sql_bioanalis_choose_table.setEnabled(False)
 
         self.verticalLayout_6.addWidget(self.pushButton_sql_bioanalis_choose_table)
 
         self.btn_DisConnect_SQL_DB = QPushButton(self.tab_SQL_Base_connect)
         self.btn_DisConnect_SQL_DB.setObjectName(u"btn_DisConnect_SQL_DB")
+        self.btn_DisConnect_SQL_DB.setEnabled(False)
         self.btn_DisConnect_SQL_DB.setGeometry(QRect(460, 220, 281, 28))
         self.age_structure_calculation.addTab(self.tab_SQL_Base_connect, "")
         self.tab_3 = QWidget()

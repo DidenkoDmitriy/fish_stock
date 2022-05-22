@@ -2,13 +2,16 @@ import pyodbc
 import pandas as pd
 import socket as s
 import connection_settings as cs
+import tmp_connection as tc
 
 # Функция подключения к базе данных
 
+
+
 def connection_to_db(
-        sql_server: str = 'SQL Server',
-        sql_server_name: str = s.gethostname(),
-        data_base_name: str = 'FISH_WORK',
+        sql_server: str = tc.MainWindow.dict_sql_settings['current_sql_server'],
+        sql_server_name: str = tc.MainWindow.dict_sql_settings['current_sql_server_name'],
+        data_base_name: str = tc.MainWindow.dict_sql_settings['current_data_base_name'],
         autocommit=True
 ):
     conn_sql_server = pyodbc.connect(
@@ -345,7 +348,7 @@ def places_of_fishing_compliance(
     )
 
 def get_list_from_sql(cur_query):
-    cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
+    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'], tc.MainWindow.dict_sql_settings['current_sql_server_name'], tc.MainWindow.dict_sql_settings['current_data_base_name'])
     cursor.execute(cur_query)
     tuple_list_of_database_tables = cursor.fetchall()
     list_of_database_tables = []
@@ -356,7 +359,7 @@ def get_list_from_sql(cur_query):
 
 def age_struct_choose_column(current_bioanalis_table):
 
-    cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
+    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'], tc.MainWindow.dict_sql_settings['current_sql_server_name'], tc.MainWindow.dict_sql_settings['current_data_base_name'])
     cursor.execute(
         '''
         SELECT COLUMN_NAME

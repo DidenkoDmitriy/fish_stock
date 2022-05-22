@@ -1,5 +1,4 @@
 import sys
-import socket as s
 import protocol_fish_counting_SQL as fc
 import connection_settings as cs
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -14,9 +13,6 @@ class MainWindow(QMainWindow):
         self.ui.btn_DisConnect_SQL_DB.clicked.connect(self.pushing_disconnecting_button)
 
     def connection(self):
-        self.ui.label_SQL_Name.setText('SQL Name')
-        self.ui.label_SQL_Server_Name.setText('SQL Server Name')
-        self.ui.label_DB_Name.setText('DB Name')
         self.ui.lineEdit_SQL_Name.setText('SQL Server')
         self.ui.lineEdit_SQL_Server_Name.setText('LAPTOP-E5Q4G2L1')
         self.ui.lineEdit_DB_Name.setText('FISH_WORK')
@@ -27,7 +23,6 @@ class MainWindow(QMainWindow):
         self.dict_sql_settings['current_sql_server'] = self.ui.lineEdit_SQL_Name.text()
         self.dict_sql_settings['current_sql_server_name'] = self.ui.lineEdit_SQL_Server_Name.text()
         self.dict_sql_settings['current_data_base_name'] = self.ui.lineEdit_DB_Name.text()
-        self.dict_sql_settings['current_bioanalis_table'] = self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()
 
         self.ui.pushButton_Connect_SQL_DB.setEnabled(False)
         self.ui.btn_DisConnect_SQL_DB.setEnabled(True)
@@ -37,6 +32,7 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
         self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(True)
 
+        self.dict_sql_settings['current_bioanalis_table'] = self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()
         self.set_tables()
         self.save_dict_file()
 
@@ -49,19 +45,18 @@ class MainWindow(QMainWindow):
         self.ui.lineEdit_DB_Name.setEnabled(True)
         self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
 
-        self.ui.pushButton_sql_bioanalis_choose_table.setEnabled(False)
         self.ui.comboBox_tab_sql_bioanalis_table_list.clear()
+        self.clear_combobox()
+        self.ui.pushButton_sql_bioanalis_choose_table.setEnabled(False)
         self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(False)
-        self.ui.comboBox_tab_age_struct_type_list_choose_column.clear()
         self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(False)
-        self.ui.comboBox_tab_age_struct_year_list_choose_column.clear()
         self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(False)
-        self.ui.comboBox_tab_age_struct_area_list_choose_column.clear()
         self.ui.pushButton_age_struct_choose_column.setEnabled(False)
 
 
     def set_tables(self):
         fc.get_list_from_sql("SELECT [name] FROM sys.objects WHERE type in (N'U')")
+        self.ui.comboBox_tab_sql_bioanalis_table_list.clear()
         self.ui.comboBox_tab_sql_bioanalis_table_list.addItems(
             fc.get_list_from_sql("SELECT [name] FROM sys.objects WHERE type in (N'U')"))
         self.ui.pushButton_sql_bioanalis_choose_table.setEnabled(True)
@@ -78,30 +73,36 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(True)
         self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(True)
         self.ui.pushButton_age_struct_choose_column.setEnabled(True)
-
         self.combobox_age_struct_choose_list()
 
         fc.get_list_from_sql("SELECT [name] FROM sys.objects WHERE type in (N'U')")
 
     def combobox_age_struct_choose_list(self):
+        self.clear_combobox()
+        self.dict_sql_settings['current_age_struct_type_column'] = fc.age_struct_choose_column(self.dict_sql_settings['current_bioanalis_table'])
+        self.dict_sql_settings['current_age_struct_type_column'] = fc.age_struct_choose_column(self.dict_sql_settings['current_bioanalis_table'])
+        self.dict_sql_settings['current_age_struct_type_column'] = fc.age_struct_choose_column(self.dict_sql_settings['current_bioanalis_table'])
         self.ui.comboBox_tab_age_struct_type_list_choose_column.addItems(
-            fc.age_struct_choose_column(cs.current_bioanalis_table)
+            self.dict_sql_settings['current_age_struct_type_column']
         )
         self.ui.comboBox_tab_age_struct_year_list_choose_column.addItems(
-            fc.age_struct_choose_column(cs.current_bioanalis_table)
+            self.dict_sql_settings['current_age_struct_type_column']
         )
         self.ui.comboBox_tab_age_struct_area_list_choose_column.addItems(
-            fc.age_struct_choose_column(cs.current_bioanalis_table)
+            self.dict_sql_settings['current_age_struct_type_column']
         )
         self.ui.pushButton_age_struct_choose_column.clicked.connect(self.button_age_struct_choose_columns)
-
-        # self.ui.comboBox_tab_age_struct_type_list_choose_column.repaint()
 
     def button_age_struct_choose_columns(self):
         self.dict_sql_settings['current_age_struct_type_column'] = self.ui.comboBox_tab_age_struct_type_list_choose_column.currentText()
         self.dict_sql_settings['current_age_struct_year_column'] = self.ui.comboBox_tab_age_struct_year_list_choose_column.currentText()
         self.dict_sql_settings['current_age_struct_area_column'] = self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()
         self.save_dict_file()
+
+    def clear_combobox(self):
+        self.ui.comboBox_tab_age_struct_type_list_choose_column.clear()
+        self.ui.comboBox_tab_age_struct_year_list_choose_column.clear()
+        self.ui.comboBox_tab_age_struct_area_list_choose_column.clear()
 
     dict_sql_settings = {
         'current_sql_server': "SQL Server",
@@ -112,6 +113,7 @@ class MainWindow(QMainWindow):
         'current_age_struct_year_column': "",
         'current_age_struct_area_column': ""
     }
+
 
     def save_dict_file(self):
         file = open("connection_settings.py", "w")
@@ -124,11 +126,6 @@ class MainWindow(QMainWindow):
                    f'current_age_struct_area_column = "{self.dict_sql_settings["current_age_struct_area_column"]}"\n'
                    )
         file.close()
-
-
-
-
-
 
 
 if __name__ == '__main__':
