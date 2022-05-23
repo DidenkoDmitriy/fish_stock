@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="1">
      <widget class="QTabWidget" name="age_structure_calculation">
       <property name="currentIndex">
        <number>0</number>
@@ -24,135 +24,11 @@
        <attribute name="title">
         <string>SQL DB</string>
        </attribute>
-       <widget class="QPushButton" name="btn_Connect_SQL_DB">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>220</y>
-          <width>591</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Connect</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_DB_Name">
-        <property name="geometry">
-         <rect>
-          <x>11</x>
-          <y>155</y>
-          <width>131</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(85, 170, 255);</string>
-        </property>
-        <property name="text">
-         <string>DB Name</string>
-        </property>
-        <property name="margin">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_SQL_Server_Name">
-        <property name="geometry">
-         <rect>
-          <x>11</x>
-          <y>97</y>
-          <width>131</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(85, 170, 255);</string>
-        </property>
-        <property name="text">
-         <string>Server Name</string>
-        </property>
-        <property name="margin">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_SQL_Name">
-        <property name="geometry">
-         <rect>
-          <x>11</x>
-          <y>39</y>
-          <width>131</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(85, 170, 255);</string>
-        </property>
-        <property name="text">
-         <string>SQL Server</string>
-        </property>
-        <property name="margin">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_SQL_Name">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>40</y>
-          <width>591</width>
-          <height>51</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_SQL_Server_Name">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>100</y>
-          <width>591</width>
-          <height>51</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit_DB_Name">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>160</y>
-          <width>591</width>
-          <height>51</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QWidget" name="verticalLayoutWidget_6">
         <property name="geometry">
          <rect>
-          <x>190</x>
-          <y>300</y>
+          <x>30</x>
+          <y>320</y>
           <width>211</width>
           <height>82</height>
          </rect>
@@ -172,12 +48,136 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_tab_sql_bioanalis_table_list"/>
+          <widget class="QComboBox" name="comboBox_tab_sql_bioanalis_table_list">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_sql_bioanalis_choose_table">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>choose table</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="horizontalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>220</y>
+          <width>371</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="btn_Connect_SQL_DB">
+           <property name="text">
+            <string>Connect</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_DisConnect_SQL_DB">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Disconnect</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="gridLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>811</width>
+          <height>161</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_DB_Name">
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(85, 170, 255);</string>
+           </property>
+           <property name="text">
+            <string>DB Name</string>
+           </property>
+           <property name="margin">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_SQL_Name">
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(85, 170, 255);</string>
+           </property>
+           <property name="text">
+            <string>SQL Server</string>
+           </property>
+           <property name="margin">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_SQL_Server_Name">
+           <property name="font">
+            <font>
+             <family>Times New Roman</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(85, 170, 255);</string>
+           </property>
+           <property name="text">
+            <string>Server Name</string>
+           </property>
+           <property name="margin">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEdit_SQL_Name"/>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEdit_DB_Name"/>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEdit_SQL_Server_Name">
+           <property name="readOnly">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -206,7 +206,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_tab_age_struct_area_list"/>
+          <widget class="QComboBox" name="comboBox_tab_age_struct_area_list">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -286,7 +290,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_tab_age_struct_type_list"/>
+          <widget class="QComboBox" name="comboBox_tab_age_struct_type_list">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -308,7 +316,37 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_tab_age_struct_year_list"/>
+          <widget class="QComboBox" name="comboBox_tab_age_struct_year_list">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget_7">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>20</y>
+          <width>231</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_tab_age_struct_type_list_2">
+           <property name="text">
+            <string>Выберете поле с видом ВБР</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_tab_age_struct_type_list_2">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
