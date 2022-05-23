@@ -1,16 +1,16 @@
 import pyodbc
 import pandas as pd
 import socket as s
-import tmp_connection as tc
+# import tmp_connection as tc
 
 # Функция подключения к базе данных
 
 
 
 def connection_to_db(
-        sql_server: str = tc.MainWindow.dict_sql_settings['current_sql_server'],
-        sql_server_name: str = tc.MainWindow.dict_sql_settings['current_sql_server_name'],
-        data_base_name: str = tc.MainWindow.dict_sql_settings['current_data_base_name'],
+        sql_server,
+        sql_server_name,
+        data_base_name,
         autocommit=True
 ):
     conn_sql_server = pyodbc.connect(
@@ -296,60 +296,61 @@ def catch_history(
 # переменную major_water_body в будущем планирую брать из sql таблицы с помощью SELECT DISTINCT
 # и проитерировать всю функцию по ней
 
-def places_of_fishing_compliance(
-        major_water_body: str = 'Бассейн реки Амур',
-):
+# def places_of_fishing_compliance(
+#         major_water_body: str = 'Бассейн реки Амур',
+#
+# ):
+#
+#     cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
+#
+#     cursor.execute(
+#         '''
+#         SELECT DISTINCT [water body]
+#         FROM bioanalis$
+#         WHERE [water body] IS NOT NULL
+#         '''
+#     )
+#
+#     results_sql_distinct = cursor.fetchall()
+#
+#     water_places_list = []
+#     major_water_please_list = []
+#     for el in results_sql_distinct:
+#         water_places_list.append(el)
+#         major_water_please_list.append(f'{major_water_body}')
+#
+#     df_water_places = pd.DataFrame({
+#         'PromArea': major_water_please_list,
+#         'WaterPleases': water_places_list
+#     })
+#
+#     for st in range(len(list(df_water_places['PromArea']))):
+#         try:
+#             cursor.execute(
+#                 f"INSERT INTO places_of_fishing"
+#                 f"([PromArea], [WaterPleases])"
+#                 f"VALUES (?,?)",
+#                 (list(df_water_places['PromArea'])[st], list(df_water_places['WaterPleases'])[st][0])
+#             )
+#
+#         except pyodbc.Error as err:
+#             print('Ошибка: ' + str(err))
+#     cursor.execute(
+#         '''
+#         Delete FROM places_of_fishing
+#         Where id not in
+#         (
+#         select min(id) as MinRowID
+#         FROM places_of_fishing
+#         group by [PromArea], [WaterPleases]
+#         )
+#         '''
+#     )
 
-    cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
-
-    cursor.execute(
-        '''
-        SELECT DISTINCT [water body]
-        FROM bioanalis$
-        WHERE [water body] IS NOT NULL
-        '''
-    )
-
-    results_sql_distinct = cursor.fetchall()
-
-    water_places_list = []
-    major_water_please_list = []
-    for el in results_sql_distinct:
-        water_places_list.append(el)
-        major_water_please_list.append(f'{major_water_body}')
-
-    df_water_places = pd.DataFrame({
-        'PromArea': major_water_please_list,
-        'WaterPleases': water_places_list
-    })
-
-    for st in range(len(list(df_water_places['PromArea']))):
-        try:
-            cursor.execute(
-                f"INSERT INTO places_of_fishing"
-                f"([PromArea], [WaterPleases])"
-                f"VALUES (?,?)",
-                (list(df_water_places['PromArea'])[st], list(df_water_places['WaterPleases'])[st][0])
-            )
-
-        except pyodbc.Error as err:
-            print('Ошибка: ' + str(err))
-    cursor.execute(
-        '''
-        Delete FROM places_of_fishing
-        Where id not in
-        (
-        select min(id) as MinRowID
-        FROM places_of_fishing
-        group by [PromArea], [WaterPleases]
-        )
-        '''
-    )
-
-def get_list_from_sql(cur_query):
-    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
-                              tc.MainWindow.dict_sql_settings['current_sql_server_name'],
-                              tc.MainWindow.dict_sql_settings['current_data_base_name'])
+def get_list_from_sql(sql_settings, cur_query):
+    cursor = connection_to_db(sql_settings['current_sql_server'],
+                              sql_settings['current_sql_server_name'],
+                              sql_settings['current_data_base_name'])
     cursor.execute(cur_query)
     tuple_list_of_database_tables = cursor.fetchall()
     list_of_database_tables = []
@@ -358,11 +359,11 @@ def get_list_from_sql(cur_query):
     return list_of_database_tables
 
 
-def age_struct_choose_column(current_bioanalis_table):
+def age_struct_choose_column(dict_sql_settings, current_bioanalis_table):
 
-    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
-                              tc.MainWindow.dict_sql_settings['current_sql_server_name'],
-                              tc.MainWindow.dict_sql_settings['current_data_base_name'])
+    cursor = connection_to_db(dict_sql_settings['current_sql_server'],
+                              dict_sql_settings['current_sql_server_name'],
+                              dict_sql_settings['current_data_base_name'])
     cursor.execute(
         '''
         SELECT COLUMN_NAME
@@ -376,15 +377,15 @@ def age_struct_choose_column(current_bioanalis_table):
         age_struct_column_list.append(column[0])
     return age_struct_column_list
 
-def age_struct_column(current_bioanalis_column, current_bioanalis_table):
-    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
-                              tc.MainWindow.dict_sql_settings['current_sql_server_name'],
-                              tc.MainWindow.dict_sql_settings['current_data_base_name'])
-    cursor.execute(
-        f'SELECT DISTINCT [{current_bioanalis_column}] FROM [{current_bioanalis_table}]',
-    )
-    tuple_age_struct_column_list = cursor.fetchall()
-    age_struct_column_list = []
-    for column in tuple_age_struct_column_list:
-        age_struct_column_list.append(str(column[0]))
-    return age_struct_column_list
+# def age_struct_column(current_bioanalis_column, current_bioanalis_table):
+#     cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
+#                               tc.MainWindow.dict_sql_settings['current_sql_server_name'],
+#                               tc.MainWindow.dict_sql_settings['current_data_base_name'])
+#     cursor.execute(
+#         f'SELECT DISTINCT [{current_bioanalis_column}] FROM [{current_bioanalis_table}]',
+#     )
+#     tuple_age_struct_column_list = cursor.fetchall()
+#     age_struct_column_list = []
+#     for column in tuple_age_struct_column_list:
+#         age_struct_column_list.append(str(column[0]))
+#     return age_struct_column_list
