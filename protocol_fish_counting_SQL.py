@@ -1,14 +1,16 @@
 import pyodbc
 import pandas as pd
 import socket as s
-import connection_settings as cs
+import tmp_connection as tc
 
 # Функция подключения к базе данных
 
+
+
 def connection_to_db(
-        sql_server: str = 'SQL Server',
-        sql_server_name: str = s.gethostname(),
-        data_base_name: str = 'FISH_WORK',
+        sql_server: str = tc.MainWindow.dict_sql_settings['current_sql_server'],
+        sql_server_name: str = tc.MainWindow.dict_sql_settings['current_sql_server_name'],
+        data_base_name: str = tc.MainWindow.dict_sql_settings['current_data_base_name'],
         autocommit=True
 ):
     conn_sql_server = pyodbc.connect(
@@ -345,10 +347,44 @@ def places_of_fishing_compliance(
     )
 
 def get_list_from_sql(cur_query):
-    cursor = connection_to_db(cs.current_sql_server, cs.current_sql_server_name, cs.current_data_base_name)
+    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
+                              tc.MainWindow.dict_sql_settings['current_sql_server_name'],
+                              tc.MainWindow.dict_sql_settings['current_data_base_name'])
     cursor.execute(cur_query)
     tuple_list_of_database_tables = cursor.fetchall()
     list_of_database_tables = []
     for table in tuple_list_of_database_tables:
         list_of_database_tables.append(table[0])
     return list_of_database_tables
+
+
+def age_struct_choose_column(current_bioanalis_table):
+
+    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
+                              tc.MainWindow.dict_sql_settings['current_sql_server_name'],
+                              tc.MainWindow.dict_sql_settings['current_data_base_name'])
+    cursor.execute(
+        '''
+        SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_NAME = ?
+        ''', current_bioanalis_table
+    )
+    tuple_age_struct_choose_column_list = cursor.fetchall()
+    age_struct_column_list = []
+    for column in tuple_age_struct_choose_column_list:
+        age_struct_column_list.append(column[0])
+    return age_struct_column_list
+
+def age_struct_column(current_bioanalis_column, current_bioanalis_table):
+    cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
+                              tc.MainWindow.dict_sql_settings['current_sql_server_name'],
+                              tc.MainWindow.dict_sql_settings['current_data_base_name'])
+    cursor.execute(
+        f'SELECT DISTINCT [{current_bioanalis_column}] FROM [{current_bioanalis_table}]',
+    )
+    tuple_age_struct_column_list = cursor.fetchall()
+    age_struct_column_list = []
+    for column in tuple_age_struct_column_list:
+        age_struct_column_list.append(str(column[0]))
+    return age_struct_column_list
