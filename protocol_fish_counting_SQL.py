@@ -358,25 +358,6 @@ def get_list_from_sql(sql_settings, cur_query):
         list_of_database_tables.append(table[0])
     return list_of_database_tables
 
-
-def age_struct_choose_column(dict_sql_settings, current_bioanalis_table):
-
-    cursor = connection_to_db(dict_sql_settings['current_sql_server'],
-                              dict_sql_settings['current_sql_server_name'],
-                              dict_sql_settings['current_data_base_name'])
-    cursor.execute(
-        '''
-        SELECT COLUMN_NAME
-        FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = ?
-        ''', current_bioanalis_table
-    )
-    tuple_age_struct_choose_column_list = cursor.fetchall()
-    age_struct_column_list = []
-    for column in tuple_age_struct_choose_column_list:
-        age_struct_column_list.append(column[0])
-    return age_struct_column_list
-
 # def age_struct_column(current_bioanalis_column, current_bioanalis_table):
 #     cursor = connection_to_db(tc.MainWindow.dict_sql_settings['current_sql_server'],
 #                               tc.MainWindow.dict_sql_settings['current_sql_server_name'],
