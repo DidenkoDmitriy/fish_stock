@@ -25,5 +25,5 @@ def get_list_from_sql(sql_settings, cur_query):
     tuple_list_of_database_tables = cursor.fetchall()
     list_of_database_tables = []
     for table in tuple_list_of_database_tables:
-        list_of_database_tables.append(table[0])
+        list_of_database_tables.append(str(table[0]))
     return list_of_database_tables

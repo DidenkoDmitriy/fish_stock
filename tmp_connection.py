@@ -139,6 +139,8 @@ class MainWindow(QMainWindow):
                                       f'SELECT DISTINCT '
                                       f'[{self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()}] '
                                       f'FROM [{self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()}]'
+                                      f'WHERE [{self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()}]'
+                                      f' IS NOT NULL'
                                       ))
 
         # self.combobox_age_struct_list()
