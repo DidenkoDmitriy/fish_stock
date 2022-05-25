@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ################################################################################
 ## Form generated from reading UI file 'ui_form.ui'
 ##
@@ -15,10 +13,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QLabel,
-    QLineEdit, QMainWindow, QMenuBar, QPushButton,
-    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGridLayout,
+    QLabel, QLineEdit, QMainWindow, QMenuBar,
+    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+    QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -69,18 +67,15 @@ class Ui_MainWindow(object):
         self.lineEdit_DB_Name.setGeometry(QRect(150, 160, 591, 51))
         self.verticalLayoutWidget_6 = QWidget(self.tab_SQL_Base_connect)
         self.verticalLayoutWidget_6.setObjectName(u"verticalLayoutWidget_6")
-        self.verticalLayoutWidget_6.setGeometry(QRect(20, 260, 361, 82))
+        self.verticalLayoutWidget_6.setGeometry(QRect(30, 310, 381, 61))
         self.verticalLayout_6 = QVBoxLayout(self.verticalLayoutWidget_6)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.label_tab_sql_bioanalis_table_list = QLabel(self.verticalLayoutWidget_6)
-        self.label_tab_sql_bioanalis_table_list.setObjectName(u"label_tab_sql_bioanalis_table_list")
-        font1 = QFont()
-        font1.setUnderline(False)
-        font1.setStrikeOut(False)
-        self.label_tab_sql_bioanalis_table_list.setFont(font1)
+        self.checkBox_tab_sql_bioanalis_table_list = QCheckBox(self.verticalLayoutWidget_6)
+        self.checkBox_tab_sql_bioanalis_table_list.setObjectName(u"checkBox_tab_sql_bioanalis_table_list")
+        self.checkBox_tab_sql_bioanalis_table_list.setEnabled(False)
 
-        self.verticalLayout_6.addWidget(self.label_tab_sql_bioanalis_table_list)
+        self.verticalLayout_6.addWidget(self.checkBox_tab_sql_bioanalis_table_list)
 
         self.comboBox_tab_sql_bioanalis_table_list = QComboBox(self.verticalLayoutWidget_6)
         self.comboBox_tab_sql_bioanalis_table_list.setObjectName(u"comboBox_tab_sql_bioanalis_table_list")
@@ -88,16 +83,26 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.comboBox_tab_sql_bioanalis_table_list)
 
-        self.pushButton_sql_bioanalis_choose_table = QPushButton(self.verticalLayoutWidget_6)
-        self.pushButton_sql_bioanalis_choose_table.setObjectName(u"pushButton_sql_bioanalis_choose_table")
-        self.pushButton_sql_bioanalis_choose_table.setEnabled(False)
-
-        self.verticalLayout_6.addWidget(self.pushButton_sql_bioanalis_choose_table)
-
         self.btn_DisConnect_SQL_DB = QPushButton(self.tab_SQL_Base_connect)
         self.btn_DisConnect_SQL_DB.setObjectName(u"btn_DisConnect_SQL_DB")
         self.btn_DisConnect_SQL_DB.setEnabled(False)
         self.btn_DisConnect_SQL_DB.setGeometry(QRect(460, 220, 281, 28))
+        self.pushButton_sql_bioanalis_choose_table = QPushButton(self.tab_SQL_Base_connect)
+        self.pushButton_sql_bioanalis_choose_table.setObjectName(u"pushButton_sql_bioanalis_choose_table")
+        self.pushButton_sql_bioanalis_choose_table.setEnabled(False)
+        self.pushButton_sql_bioanalis_choose_table.setGeometry(QRect(490, 290, 379, 28))
+        self.checkBox_tab_sql_connect_SQL_DB = QCheckBox(self.tab_SQL_Base_connect)
+        self.checkBox_tab_sql_connect_SQL_DB.setObjectName(u"checkBox_tab_sql_connect_SQL_DB")
+        self.checkBox_tab_sql_connect_SQL_DB.setEnabled(True)
+        self.checkBox_tab_sql_connect_SQL_DB.setGeometry(QRect(150, 260, 150, 30))
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.checkBox_tab_sql_connect_SQL_DB.sizePolicy().hasHeightForWidth())
+        self.checkBox_tab_sql_connect_SQL_DB.setSizePolicy(sizePolicy)
+        font1 = QFont()
+        font1.setPointSize(12)
+        self.checkBox_tab_sql_connect_SQL_DB.setFont(font1)
         self.age_structure_calculation.addTab(self.tab_SQL_Base_connect, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
@@ -137,7 +142,7 @@ class Ui_MainWindow(object):
         self.button_age_structure_calculation_save_results.setGeometry(QRect(20, 680, 631, 51))
         self.gridLayoutWidget = QWidget(self.tab_3)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(20, 20, 631, 311))
+        self.gridLayoutWidget.setGeometry(QRect(20, 20, 631, 181))
         self.gridLayout_2 = QGridLayout(self.gridLayoutWidget)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -155,10 +160,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label_tab_age_struct_type_list_choose_column = QLabel(self.gridLayoutWidget)
-        self.label_tab_age_struct_type_list_choose_column.setObjectName(u"label_tab_age_struct_type_list_choose_column")
+        self.checkBox_tab_age_struct_type_list_choose_column = QCheckBox(self.gridLayoutWidget)
+        self.checkBox_tab_age_struct_type_list_choose_column.setObjectName(u"checkBox_tab_age_struct_type_list_choose_column")
+        self.checkBox_tab_age_struct_type_list_choose_column.setEnabled(False)
 
-        self.verticalLayout.addWidget(self.label_tab_age_struct_type_list_choose_column)
+        self.verticalLayout.addWidget(self.checkBox_tab_age_struct_type_list_choose_column)
 
         self.comboBox_tab_age_struct_type_list_choose_column = QComboBox(self.gridLayoutWidget)
         self.comboBox_tab_age_struct_type_list_choose_column.setObjectName(u"comboBox_tab_age_struct_type_list_choose_column")
@@ -171,10 +177,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.label_tab_age_struct_area_list_choose_column = QLabel(self.gridLayoutWidget)
-        self.label_tab_age_struct_area_list_choose_column.setObjectName(u"label_tab_age_struct_area_list_choose_column")
+        self.checkBox_tab_age_struct_area_list_choose_column = QCheckBox(self.gridLayoutWidget)
+        self.checkBox_tab_age_struct_area_list_choose_column.setObjectName(u"checkBox_tab_age_struct_area_list_choose_column")
+        self.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
 
-        self.verticalLayout_3.addWidget(self.label_tab_age_struct_area_list_choose_column)
+        self.verticalLayout_3.addWidget(self.checkBox_tab_age_struct_area_list_choose_column)
 
         self.comboBox_tab_age_struct_area_list_choose_column = QComboBox(self.gridLayoutWidget)
         self.comboBox_tab_age_struct_area_list_choose_column.setObjectName(u"comboBox_tab_age_struct_area_list_choose_column")
@@ -212,12 +219,19 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.comboBox_tab_age_struct_type_list, 7, 0, 1, 1)
 
+        self.pushButton_age_struct_choose_values = QPushButton(self.gridLayoutWidget)
+        self.pushButton_age_struct_choose_values.setObjectName(u"pushButton_age_struct_choose_values")
+        self.pushButton_age_struct_choose_values.setEnabled(False)
+
+        self.gridLayout_2.addWidget(self.pushButton_age_struct_choose_values, 8, 0, 1, 3)
+
         self.verticalLayout_5 = QVBoxLayout()
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.label_tab_age_struct_year_list_choose_column = QLabel(self.gridLayoutWidget)
-        self.label_tab_age_struct_year_list_choose_column.setObjectName(u"label_tab_age_struct_year_list_choose_column")
+        self.checkBox_tab_age_struct_year_list_choose_column = QCheckBox(self.gridLayoutWidget)
+        self.checkBox_tab_age_struct_year_list_choose_column.setObjectName(u"checkBox_tab_age_struct_year_list_choose_column")
+        self.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
 
-        self.verticalLayout_5.addWidget(self.label_tab_age_struct_year_list_choose_column)
+        self.verticalLayout_5.addWidget(self.checkBox_tab_age_struct_year_list_choose_column)
 
         self.comboBox_tab_age_struct_year_list_choose_column = QComboBox(self.gridLayoutWidget)
         self.comboBox_tab_age_struct_year_list_choose_column.setObjectName(u"comboBox_tab_age_struct_year_list_choose_column")
@@ -227,12 +241,6 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_2.addLayout(self.verticalLayout_5, 1, 1, 1, 1)
-
-        self.pushButton_age_struct_choose_values = QPushButton(self.gridLayoutWidget)
-        self.pushButton_age_struct_choose_values.setObjectName(u"pushButton_age_struct_choose_values")
-        self.pushButton_age_struct_choose_values.setEnabled(False)
-
-        self.gridLayout_2.addWidget(self.pushButton_age_struct_choose_values, 8, 0, 1, 3)
 
         self.age_structure_calculation.addTab(self.tab_3, "")
         self.tab_4 = QWidget()
@@ -270,22 +278,23 @@ class Ui_MainWindow(object):
         self.label_DB_Name.setText(QCoreApplication.translate("MainWindow", u"DB Name", None))
         self.label_SQL_Server_Name.setText(QCoreApplication.translate("MainWindow", u"Server Name", None))
         self.label_SQL_Name.setText(QCoreApplication.translate("MainWindow", u"SQL Server", None))
-        self.label_tab_sql_bioanalis_table_list.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 \u0431\u0438\u043e\u0430\u043d\u0430\u043b\u0438\u0437\u0430", None))
-        self.pushButton_sql_bioanalis_choose_table.setText(QCoreApplication.translate("MainWindow", u"choose table", None))
+        self.checkBox_tab_sql_bioanalis_table_list.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 \u0431\u0438\u043e\u0430\u043d\u0430\u043b\u0438\u0437\u0430:", None))
         self.btn_DisConnect_SQL_DB.setText(QCoreApplication.translate("MainWindow", u"disconnect", None))
+        self.pushButton_sql_bioanalis_choose_table.setText(QCoreApplication.translate("MainWindow", u"choose table", None))
+        self.checkBox_tab_sql_connect_SQL_DB.setText(QCoreApplication.translate("MainWindow", u"Connected", None))
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_SQL_Base_connect), QCoreApplication.translate("MainWindow", u"SQL DB", None))
         self.label_export_age_structure_calculation_to_sql.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 ... \u0434\u043b\u044f \u044d\u043a\u0441\u043f\u043e\u0440\u0442\u0430", None))
         self.pushButton_export_age_structure_calculation_to_sql.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.button_age_structure_calculation_print_results.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0432\u0435\u0441\u0442\u0438 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u044b \u0440\u0430\u0441\u0447\u0435\u0442\u043e\u0432", None))
         self.button_age_structure_calculation_save_results.setText(QCoreApplication.translate("MainWindow", u"\u042d\u043a\u043f\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 sql", None))
         self.pushButton_age_struct_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u043e\u0432", None))
-        self.label_tab_age_struct_type_list_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u0430 \u0441 \u0432\u0438\u0434\u043e\u043c", None))
-        self.label_tab_age_struct_area_list_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u0430 \u0441 \u043c\u0435\u0441\u0442\u0430\u043c\u0438 \u043b\u043e\u0432\u0430", None))
+        self.checkBox_tab_age_struct_type_list_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u0430 \u0441 \u0432\u0438\u0434\u043e\u043c", None))
+        self.checkBox_tab_age_struct_area_list_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u0430 \u0441 \u043c\u0435\u0441\u0442\u0430\u043c\u0438 \u043b\u043e\u0432\u0430", None))
         self.label_tab_age_struct_type_list.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0438\u0434\u044b", None))
         self.label_tab_age_struct_year_list.setText(QCoreApplication.translate("MainWindow", u"\u0413\u043e\u0434\u0430", None))
         self.label_tab_age_struct_area_list.setText(QCoreApplication.translate("MainWindow", u"\u041c\u0435\u0441\u0442\u0430 \u043b\u043e\u0432\u0430", None))
-        self.label_tab_age_struct_year_list_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u0430 \u0441 \u0433\u043e\u0434\u0430\u043c\u0438 \u043b\u043e\u0432\u0430", None))
         self.pushButton_age_struct_choose_values.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0439", None))
+        self.checkBox_tab_age_struct_year_list_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u0430 \u0441 \u0433\u043e\u0434\u0430\u043c\u0438 \u043b\u043e\u0432\u0430", None))
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"\u0420\u0430\u0441\u0447\u0435\u0442 \u0432\u043e\u0437\u0440\u0430\u0441\u0442\u043d\u043e\u0439 \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u044b", None))
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u043c. \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430", None))
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"\u0411\u0438\u043e \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438", None))

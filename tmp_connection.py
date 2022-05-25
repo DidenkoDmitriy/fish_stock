@@ -13,15 +13,40 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.connection()
 
-        # Connecting buttons events to function in code
-        self.ui.pushButton_Connect_SQL_DB.clicked.connect(self.pushing_connecting_button)
-        self.ui.btn_DisConnect_SQL_DB.clicked.connect(self.pushing_disconnecting_button)
+        # Connecting checkbox events to function in code
+        self.ui.checkBox_tab_sql_connect_SQL_DB.stateChanged.connect(self.connection_checkbox_changed)
+
+    def connection_checkbox_changed(self):
+        if self.ui.checkBox_tab_sql_connect_SQL_DB.checkState():
+            self.pushing_connecting_button()
+        else:
+            self.pushing_disconnecting_button()
 
     # Sets start sql parameters
     def connection(self):
         self.ui.lineEdit_SQL_Name.setText('SQL Server')
         self.ui.lineEdit_SQL_Server_Name.setText('DESKTOP-6RLRC5B\SQLEXPRESS')
         self.ui.lineEdit_DB_Name.setText('FISH_WORK')
+
+    # Return to Step 0.
+    def pushing_disconnecting_button(self):
+        # Enabled/Disabled elements set
+        self.ui.pushButton_Connect_SQL_DB.setEnabled(True)
+        self.ui.btn_DisConnect_SQL_DB.setEnabled(False)
+        self.ui.lineEdit_SQL_Name.setEnabled(True)
+        self.ui.lineEdit_SQL_Server_Name.setEnabled(True)
+        self.ui.lineEdit_DB_Name.setEnabled(True)
+        self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
+        self.ui.comboBox_tab_sql_bioanalis_table_list.clear()
+        self.ui.pushButton_sql_bioanalis_choose_table.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+        self.ui.pushButton_age_struct_choose_column.setEnabled(False)
+
+        self.ui.checkBox_tab_sql_bioanalis_table_list.setChecked(False)
+        self.ui.checkBox_tab_sql_bioanalis_table_list.setEnabled(False)
+
 
     # Step 1. Function to set SQL parameters and dynamic interface working
     def pushing_connecting_button(self):
@@ -41,6 +66,7 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
         self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(True)
         self.ui.pushButton_sql_bioanalis_choose_table.setEnabled(True)
+        self.ui.checkBox_tab_sql_bioanalis_table_list.setEnabled(True)
 
         # Completion comboBox data from SQL
         self.ui.comboBox_tab_sql_bioanalis_table_list.clear()
@@ -49,24 +75,9 @@ class MainWindow(QMainWindow):
                                       "SELECT [name] FROM sys.objects WHERE type in (N'U')"
                                       ))
 
-        self.ui.pushButton_sql_bioanalis_choose_table.clicked.connect(self.push_button_age_struct_choose_table)
+        self.ui.checkBox_tab_sql_bioanalis_table_list.stateChanged.connect(self.push_button_age_struct_choose_table)
+        # self.ui.pushButton_sql_bioanalis_choose_table.clicked.connect(self.push_button_age_struct_choose_table)
         self.save_dict_file()
-
-    # Retutn to Step 0.
-    def pushing_disconnecting_button(self):
-        # Enabled/Disabled elements set
-        self.ui.pushButton_Connect_SQL_DB.setEnabled(True)
-        self.ui.btn_DisConnect_SQL_DB.setEnabled(False)
-        self.ui.lineEdit_SQL_Name.setEnabled(True)
-        self.ui.lineEdit_SQL_Server_Name.setEnabled(True)
-        self.ui.lineEdit_DB_Name.setEnabled(True)
-        self.ui.comboBox_tab_sql_bioanalis_table_list.setEnabled(False)
-        self.ui.comboBox_tab_sql_bioanalis_table_list.clear()
-        self.ui.pushButton_sql_bioanalis_choose_table.setEnabled(False)
-        self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(False)
-        self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(False)
-        self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(False)
-        self.ui.pushButton_age_struct_choose_column.setEnabled(False)
 
     # Step 2. SQL connected and bioanalyse Table chosen.
     def push_button_age_struct_choose_table(self):
@@ -144,16 +155,39 @@ class MainWindow(QMainWindow):
                                       ))
 
         # self.combobox_age_struct_list()
-        # self.save_dict_file()
+        self.save_dict_file()
+        self.ui.pushButton_age_struct_choose_values.clicked.connect(self.button_age_struct_choose_values_pushed)
+
+    def button_age_struct_choose_values_pushed(self):
+        self.dict_sql_settings["current_age_struct_type_current"] = \
+            self.ui.comboBox_tab_age_struct_type_list.currentText()
+        self.dict_sql_settings["current_age_struct_year_current"] = \
+            self.ui.comboBox_tab_age_struct_year_list.currentText()
+        self.dict_sql_settings["current_age_struct_area_current"] = \
+            self.ui.comboBox_tab_age_struct_area_list.currentText()
+
+        self.save_dict_file()
+
+    def load_settings_from_file(self):
+        import connection_settings
+
+        self.dict_sql_settings["current_sql_server"] = connection_settings.current_sql_server
+        self.dict_sql_settings["current_sql_server_name"] = connection_settings.current_sql_server_name
+        self.dict_sql_settings["current_data_base_name"] = connection_settings.current_data_base_name
+        self.dict_sql_settings["current_bioanalis_table"] = connection_settings.current_bioanalis_table
+        self.dict_sql_settings["current_age_struct_type_column"] = connection_settings.current_age_struct_type_column
+        self.dict_sql_settings["current_age_struct_year_column"] = connection_settings.current_age_struct_year_column
+        self.dict_sql_settings["current_age_struct_area_column"] = connection_settings.current_age_struct_area_column
+        self.dict_sql_settings["current_age_struct_type_current"] = connection_settings.current_age_struct_type_current
+        self.dict_sql_settings["current_age_struct_year_current"] = connection_settings.current_age_struct_year_current
+        self.dict_sql_settings["current_age_struct_area_current"] = connection_settings.current_age_struct_area_current
 
     # def combobox_age_struct_list(self):
-
     #
     #     self.ui.comboBox_tab_age_struct_type_list_choose_column.currentText()
     #     self.ui.comboBox_tab_age_struct_year_list_choose_column.currentText()
     #     self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()
     #
-    #     self.ui.pushButton_age_struct_choose_values.clicked.connect(self.button_age_struct_columns)
     #
     # def button_age_struct_columns(self):
     #     self.dict_sql_settings[
@@ -173,9 +207,9 @@ class MainWindow(QMainWindow):
         'current_age_struct_type_column': "",
         'current_age_struct_year_column': "",
         'current_age_struct_area_column': "",
-        'current_age_struct_type_data_list': "",
-        'current_age_struct_year_data_list': "",
-        'current_age_struct_area_data_list': ""
+        'current_age_struct_type_current': "",
+        'current_age_struct_year_current': "",
+        'current_age_struct_area_current': ""
     }
 
     def save_dict_file(self):
@@ -187,9 +221,9 @@ class MainWindow(QMainWindow):
                    f'current_age_struct_type_column = "{self.dict_sql_settings["current_age_struct_type_column"]}"\n'
                    f'current_age_struct_year_column = "{self.dict_sql_settings["current_age_struct_year_column"]}"\n'
                    f'current_age_struct_area_column = "{self.dict_sql_settings["current_age_struct_area_column"]}"\n'
-                   f'current_age_struct_type_data_list = "{self.dict_sql_settings["current_age_struct_type_data_list"]}"\n'
-                   f'current_age_struct_year_data_list = "{self.dict_sql_settings["current_age_struct_year_data_list"]}"\n'
-                   f'current_age_struct_area_data_list = "{self.dict_sql_settings["current_age_struct_area_data_list"]}"\n'
+                   f'current_age_struct_type_current = "{self.dict_sql_settings["current_age_struct_type_current"]}"\n'
+                   f'current_age_struct_year_current = "{self.dict_sql_settings["current_age_struct_year_current"]}"\n'
+                   f'current_age_struct_area_current = "{self.dict_sql_settings["current_age_struct_area_current"]}"\n'
                    )
         file.close()
 
