@@ -199,6 +199,20 @@ class MainWindow(QMainWindow):
                                       ))
         self.ui.checkBox_tab_age_struct_type_list_choose_column.stateChanged.connect(self.type_checkbox_changed)
 
+        self.ui.checkBox_tab_age_struct_type_list_choose_column.setChecked(False)
+
+        self.ui.checkBox_tab_age_struct_year_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_year_list.clear()
+        self.ui.comboBox_tab_age_struct_year_list.setEnabled(False)
+
+        self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_area_list.clear()
+        self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
+
+        self.ui.pushButton_age_struct_choose_values.setEnabled(False)
+
     def type_checkbox_changed(self):
 
         if self.ui.checkBox_tab_age_struct_type_list_choose_column.checkState():
