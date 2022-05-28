@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1160</width>
-    <height>861</height>
+    <width>874</width>
+    <height>558</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -144,7 +144,7 @@
           <x>20</x>
           <y>240</y>
           <width>381</width>
-          <height>61</height>
+          <height>155</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -165,23 +165,38 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="label_export_age_structure_calculation_to_sql">
+           <property name="text">
+            <string>Выберите таблицу age_struct для экспорта</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_export_age_structure_calculation_to_sql">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_export_age_structure_persent_calculation_to_sql">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Выберите таблицу age_struct_persent для экспорта</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_export_age_structure_persent_calculation_to_sql">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
         </layout>
-       </widget>
-       <widget class="QPushButton" name="pushButton_sql_bioanalis_choose_table">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>490</x>
-          <y>290</y>
-          <width>379</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>choose table</string>
-        </property>
        </widget>
        <widget class="QCheckBox" name="checkBox_tab_sql_connect_SQL_DB">
         <property name="enabled">
@@ -221,66 +236,13 @@
        <attribute name="title">
         <string>Расчет возрастной структуры</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_3">
-        <property name="geometry">
-         <rect>
-          <x>660</x>
-          <y>20</y>
-          <width>451</width>
-          <height>181</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_export_age_structure_calculation_to_sql">
-           <property name="text">
-            <string>Выберите таблицу age_struct для экспорта</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_export_age_structure_calculation_to_sql">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_export_age_structure_persent_calculation_to_sql">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="text">
-            <string>Выберите таблицу age_struct_persent для экспорта</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_export_age_structure_persent_calculation_to_sql">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_export_age_structure_calculation_to_sql">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
        <widget class="QTextEdit" name="textEdit_age_structure_calculation_for_print_dataframe">
         <property name="geometry">
          <rect>
           <x>20</x>
           <y>210</y>
           <width>631</width>
-          <height>521</height>
+          <height>221</height>
          </rect>
         </property>
        </widget>
@@ -290,7 +252,7 @@
           <x>20</x>
           <y>20</y>
           <width>631</width>
-          <height>181</height>
+          <height>191</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
@@ -314,12 +276,9 @@
          <item row="1" column="0">
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
-            <widget class="QCheckBox" name="checkBox_tab_age_struct_type_list_choose_column">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QLabel" name="label_tab_age_struct_type_list">
              <property name="text">
-              <string>Выбор столбца с видом</string>
+              <string>Виды</string>
              </property>
             </widget>
            </item>
@@ -335,12 +294,9 @@
          <item row="1" column="2">
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <widget class="QCheckBox" name="checkBox_tab_age_struct_area_list_choose_column">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QLabel" name="label_tab_age_struct_area_list">
              <property name="text">
-              <string>Выбор столбца с местами лова</string>
+              <string>Места лова</string>
              </property>
             </widget>
            </item>
@@ -353,31 +309,10 @@
            </item>
           </layout>
          </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="label_tab_age_struct_type_list">
-           <property name="text">
-            <string>Виды</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QLabel" name="label_tab_age_struct_year_list">
-           <property name="text">
-            <string>Года</string>
-           </property>
-          </widget>
-         </item>
          <item row="7" column="1">
           <widget class="QComboBox" name="comboBox_tab_age_struct_year_list">
            <property name="enabled">
             <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="2">
-          <widget class="QLabel" name="label_tab_age_struct_area_list">
-           <property name="text">
-            <string>Места лова</string>
            </property>
           </widget>
          </item>
@@ -401,12 +336,9 @@
          <item row="1" column="1">
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QCheckBox" name="checkBox_tab_age_struct_year_list_choose_column">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QLabel" name="label_tab_age_struct_year_list">
              <property name="text">
-              <string>Выбор столбца с годами лова</string>
+              <string>Года</string>
              </property>
             </widget>
            </item>
@@ -419,7 +351,69 @@
            </item>
           </layout>
          </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="checkBox_tab_age_struct_type_list_choose_column">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Выбор столбца с видом</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QCheckBox" name="checkBox_tab_age_struct_year_list_choose_column">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Выбор столбца с годами лова</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QCheckBox" name="checkBox_tab_age_struct_area_list_choose_column">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Выбор столбца с местами лова</string>
+           </property>
+          </widget>
+         </item>
         </layout>
+       </widget>
+       <widget class="QPushButton" name="pushButton_export_age_structure_calculation_to_sql">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>690</x>
+          <y>170</y>
+          <width>111</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Save to SQL</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_load_age_structure_from_sql">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>690</x>
+          <y>200</y>
+          <width>111</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Load from SQL</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
@@ -446,7 +440,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1160</width>
+     <width>874</width>
      <height>26</height>
     </rect>
    </property>
