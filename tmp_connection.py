@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
     # Sets start sql parameters
     def connection(self):
         self.ui.lineEdit_SQL_Name.setText('SQL Server')
-        self.ui.lineEdit_SQL_Server_Name.setText('DESKTOP-6RLRC5B\SQLEXPRESS')
+        self.ui.lineEdit_SQL_Server_Name.setText('LAPTOP-E5Q4G2L1')
         self.ui.lineEdit_DB_Name.setText('FISH_WORK')
 
     # Return to Step 0.
@@ -46,7 +46,27 @@ class MainWindow(QMainWindow):
 
         self.ui.comboBox_export_age_structure_calculation_to_sql.setEnabled(False)
         self.ui.comboBox_export_age_structure_persent_calculation_to_sql.setEnabled(False)
+        self.ui.comboBox_export_age_structure_calculation_to_sql.clear()
+        self.ui.comboBox_export_age_structure_persent_calculation_to_sql.clear()
 
+        self.ui.comboBox_tab_age_struct_type_list.clear()
+        self.ui.comboBox_tab_age_struct_year_list.clear()
+        self.ui.comboBox_tab_age_struct_area_list.clear()
+        self.ui.comboBox_tab_age_struct_type_list.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_year_list.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(False)
+        self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+        self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+        self.ui.pushButton_age_struct_choose_column.setEnabled(False)
+        self.ui.pushButton_age_struct_choose_values.setEnabled(False)
+
+        self.ui.checkBox_tab_age_struct_type_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_year_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_type_list_choose_column.setEnabled(False)
+        self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+        self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
     # Step 1. Function to set SQL parameters and dynamic interface working
     def pushing_connecting_button(self):
         # Set SQL parameters
@@ -93,46 +113,72 @@ class MainWindow(QMainWindow):
 
     # Step 2. SQL connected and bioanalyse Table chosen.
     def push_button_age_struct_choose_table(self):
-        self.dict_sql_settings['current_bioanalis_table'] = self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()
-        # self.save_dict_file()
+        if self.ui.checkBox_tab_sql_bioanalis_table_list.checkState():
+            self.dict_sql_settings['current_bioanalis_table'] = self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()
+            # self.save_dict_file()
 
-        # Enabled/Disabled interface elements set
-        self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(True)
-        self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(True)
-        self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(True)
-        self.ui.pushButton_age_struct_choose_column.setEnabled(True)
+            # Enabled/Disabled interface elements set
+            self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(True)
+            self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(True)
+            self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(True)
+            self.ui.pushButton_age_struct_choose_column.setEnabled(True)
 
-        # Clearing choose-column-combobox
-        self.ui.comboBox_tab_age_struct_type_list_choose_column.clear()
-        self.ui.comboBox_tab_age_struct_year_list_choose_column.clear()
-        self.ui.comboBox_tab_age_struct_area_list_choose_column.clear()
+            # Clearing choose-column-combobox
+            self.ui.comboBox_tab_age_struct_type_list_choose_column.clear()
+            self.ui.comboBox_tab_age_struct_year_list_choose_column.clear()
+            self.ui.comboBox_tab_age_struct_area_list_choose_column.clear()
 
-        # Set data from SQL to choose-column-combobox
-        tmp_list_of_columns = sql_lib.get_list_from_sql(self.dict_sql_settings,
-                                                        '''
-                                                    SELECT COLUMN_NAME
-                                                    FROM INFORMATION_SCHEMA.COLUMNS
-                                                    ''' + "WHERE TABLE_NAME = '" +
-                                                        str(self.dict_sql_settings['current_bioanalis_table']) + str(
-                                                            "'")
-                                                        )
+            # Set data from SQL to choose-column-combobox
+            tmp_list_of_columns = sql_lib.get_list_from_sql(self.dict_sql_settings,
+                                                            '''
+                                                            SELECT COLUMN_NAME
+                                                            FROM INFORMATION_SCHEMA.COLUMNS
+                                                            ''' + "WHERE TABLE_NAME = '" +
+                                                            str(self.dict_sql_settings['current_bioanalis_table']) + str(
+                                                                "'")
+                                                            )
 
-        self.ui.comboBox_tab_age_struct_type_list_choose_column.addItems(tmp_list_of_columns)
-        self.ui.comboBox_tab_age_struct_year_list_choose_column.addItems(tmp_list_of_columns)
-        self.ui.comboBox_tab_age_struct_area_list_choose_column.addItems(tmp_list_of_columns)
+            self.ui.comboBox_tab_age_struct_type_list_choose_column.addItems(tmp_list_of_columns)
+            self.ui.comboBox_tab_age_struct_year_list_choose_column.addItems(tmp_list_of_columns)
+            self.ui.comboBox_tab_age_struct_area_list_choose_column.addItems(tmp_list_of_columns)
 
-        # Sets init values in comboboxes
-        if tmp_list_of_columns.count('type') != 0:
-            self.ui.comboBox_tab_age_struct_type_list_choose_column.\
-                setCurrentIndex(tmp_list_of_columns.index('type'))
-        if tmp_list_of_columns.count('year') != 0:
-            self.ui.comboBox_tab_age_struct_year_list_choose_column.\
-                setCurrentIndex(tmp_list_of_columns.index('year'))
-        if tmp_list_of_columns.count('major water body') != 0:
-            self.ui.comboBox_tab_age_struct_area_list_choose_column.\
-                setCurrentIndex(tmp_list_of_columns.index('major water body'))
+            # Sets init values in comboboxes
+            if tmp_list_of_columns.count('type') != 0:
+                self.ui.comboBox_tab_age_struct_type_list_choose_column.\
+                    setCurrentIndex(tmp_list_of_columns.index('type'))
+            if tmp_list_of_columns.count('year') != 0:
+                self.ui.comboBox_tab_age_struct_year_list_choose_column.\
+                    setCurrentIndex(tmp_list_of_columns.index('year'))
+            if tmp_list_of_columns.count('major water body') != 0:
+                self.ui.comboBox_tab_age_struct_area_list_choose_column.\
+                    setCurrentIndex(tmp_list_of_columns.index('major water body'))
 
-        self.ui.pushButton_age_struct_choose_column.clicked.connect(self.button_age_struct_choose_columns)
+            self.ui.pushButton_age_struct_choose_column.clicked.connect(self.button_age_struct_choose_columns)
+        else:
+            self.ui.comboBox_tab_age_struct_type_list_choose_column.clear()
+            self.ui.comboBox_tab_age_struct_year_list_choose_column.clear()
+            self.ui.comboBox_tab_age_struct_area_list_choose_column.clear()
+            self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+            self.ui.pushButton_age_struct_choose_column.setEnabled(False)
+
+            self.ui.checkBox_tab_age_struct_type_list_choose_column.setChecked(False)
+            self.ui.checkBox_tab_age_struct_type_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_type_list.clear()
+            self.ui.comboBox_tab_age_struct_type_list.setEnabled(False)
+
+            self.ui.checkBox_tab_age_struct_year_list_choose_column.setChecked(False)
+            self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_year_list.clear()
+            self.ui.comboBox_tab_age_struct_year_list.setEnabled(False)
+
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_area_list.clear()
+            self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
+
+            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
 
     # Step 3. Setting area, year, type
     def button_age_struct_choose_columns(self):
@@ -155,42 +201,76 @@ class MainWindow(QMainWindow):
 
     def type_checkbox_changed(self):
 
-        self.dict_sql_settings[
-            'current_age_struct_year_column'] = self.ui.comboBox_tab_age_struct_year_list_choose_column.currentText()
-        self.ui.comboBox_tab_age_struct_year_list.setEnabled(True)
-        self.ui.comboBox_tab_age_struct_year_list.clear()
-        self.ui.comboBox_tab_age_struct_year_list.addItems(
-            sql_lib.get_list_from_sql(self.dict_sql_settings,
-                                      f'SELECT DISTINCT '
-                                      f'[{self.ui.comboBox_tab_age_struct_year_list_choose_column.currentText()}] '
-                                      f'FROM [{self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()}]'
-                                      f'WHERE [{self.ui.comboBox_tab_age_struct_type_list_choose_column.currentText()}]'
-                                      f"LIKE '{self.ui.comboBox_tab_age_struct_type_list.currentText()}'"
-                                      ))
-        self.ui.checkBox_tab_age_struct_year_list_choose_column.stateChanged.connect(self.year_checkbox_changed)
+        if self.ui.checkBox_tab_age_struct_type_list_choose_column.checkState():
+            self.dict_sql_settings[
+                'current_age_struct_year_column'] = self.ui.comboBox_tab_age_struct_year_list_choose_column.currentText()
+            self.ui.comboBox_tab_age_struct_year_list.setEnabled(True)
+            self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(True)
+            self.ui.comboBox_tab_age_struct_year_list.clear()
+            self.ui.comboBox_tab_age_struct_year_list.addItems(
+                sql_lib.get_list_from_sql(self.dict_sql_settings,
+                                          f'SELECT DISTINCT '
+                                          f'[{self.ui.comboBox_tab_age_struct_year_list_choose_column.currentText()}] '
+                                          f'FROM [{self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()}]'
+                                          f'WHERE [{self.ui.comboBox_tab_age_struct_type_list_choose_column.currentText()}]'
+                                          f"LIKE '{self.ui.comboBox_tab_age_struct_type_list.currentText()}'"
+                                          ))
+            self.ui.checkBox_tab_age_struct_year_list_choose_column.stateChanged.connect(self.year_checkbox_changed)
+
+
+        else:
+            self.ui.checkBox_tab_age_struct_year_list_choose_column.setChecked(False)
+            self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_year_list.clear()
+            self.ui.comboBox_tab_age_struct_year_list.setEnabled(False)
+
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_area_list.clear()
+            self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
+
+            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
 
     def year_checkbox_changed(self):
+        if self.ui.checkBox_tab_age_struct_year_list_choose_column.checkState():
+            self.dict_sql_settings[
+                'current_age_struct_area_column'] = self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()
+            self.ui.comboBox_tab_age_struct_area_list.setEnabled(True)
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(True)
+            self.ui.comboBox_tab_age_struct_area_list.clear()
 
-        self.dict_sql_settings[
-            'current_age_struct_area_column'] = self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()
-        self.ui.comboBox_tab_age_struct_area_list.setEnabled(True)
-        self.ui.pushButton_age_struct_choose_values.setEnabled(True)
-        self.ui.comboBox_tab_age_struct_area_list.clear()
+            self.ui.comboBox_tab_age_struct_area_list.addItems(
+                sql_lib.get_list_from_sql(self.dict_sql_settings,
+                                          f'SELECT DISTINCT '
+                                          f'[{self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()}] '
+                                          f'FROM [{self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()}]'
+                                          f'WHERE [{self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()}]'
+                                          f'IS NOT NULL '
+                                          f'AND [{self.ui.comboBox_tab_age_struct_type_list_choose_column.currentText()}] '
+                                          f"LIKE '{self.ui.comboBox_tab_age_struct_type_list.currentText()}'"
+                                          ))
 
-        self.ui.comboBox_tab_age_struct_area_list.addItems(
-            sql_lib.get_list_from_sql(self.dict_sql_settings,
-                                      f'SELECT DISTINCT '
-                                      f'[{self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()}] '
-                                      f'FROM [{self.ui.comboBox_tab_sql_bioanalis_table_list.currentText()}]'
-                                      f'WHERE [{self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()}]'
-                                      f' IS NOT NULL'
-                                      ))
+            # self.combobox_age_struct_list()
+            self.save_dict_file()
+            self.ui.pushButton_age_struct_choose_values.clicked.connect(self.button_age_struct_choose_values_pushed)
 
-        # self.combobox_age_struct_list()
-        self.save_dict_file()
-        self.ui.pushButton_age_struct_choose_values.clicked.connect(self.button_age_struct_choose_values_pushed)
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.stateChanged.connect(self.area_checkbox_changed)
+        else:
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
+            self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+            self.ui.comboBox_tab_age_struct_area_list.clear()
+            self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
 
-    #
+            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
+
+    def area_checkbox_changed(self):
+        if self.ui.checkBox_tab_age_struct_area_list_choose_column.checkState():
+            self.ui.pushButton_age_struct_choose_values.setEnabled(True)
+        else:
+            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
+            self.ui.textEdit_age_structure_calculation_for_print_dataframe.clear()
+            self.ui.pushButton_export_age_structure_calculation_to_sql.setEnabled(False)
+
     def button_age_struct_choose_values_pushed(self):
 
         # export data (type, year, place) from combobox to dict
