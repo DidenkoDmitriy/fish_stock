@@ -25,14 +25,12 @@ class MainWindow(QMainWindow):
     # Sets start sql parameters
     def connection(self):
         self.ui.lineEdit_SQL_Name.setText('SQL Server')
-        self.ui.lineEdit_SQL_Server_Name.setText('DESKTOP-6RLRC5B\SQLEXPRESS')
+        self.ui.lineEdit_SQL_Server_Name.setText('LAPTOP-E5Q4G2L1')
         self.ui.lineEdit_DB_Name.setText('FISH_WORK')
 
     # Return to Step 0.
     def pushing_disconnecting_button(self):
         # Enabled/Disabled elements set
-        self.ui.pushButton_Connect_SQL_DB.setEnabled(True)
-        self.ui.btn_DisConnect_SQL_DB.setEnabled(False)
         self.ui.lineEdit_SQL_Name.setEnabled(True)
         self.ui.lineEdit_SQL_Server_Name.setEnabled(True)
         self.ui.lineEdit_DB_Name.setEnabled(True)
@@ -47,7 +45,6 @@ class MainWindow(QMainWindow):
         self.ui.checkBox_tab_sql_bioanalis_table_list.setChecked(False)
         self.ui.checkBox_tab_sql_bioanalis_table_list.setEnabled(False)
 
-
     # Step 1. Function to set SQL parameters and dynamic interface working
     def pushing_connecting_button(self):
         # Set SQL parameters
@@ -58,8 +55,6 @@ class MainWindow(QMainWindow):
         # Dynamic interface
 
         # Enabled/Disabled elements set
-        self.ui.pushButton_Connect_SQL_DB.setEnabled(False)
-        self.ui.btn_DisConnect_SQL_DB.setEnabled(True)
         self.ui.lineEdit_SQL_Name.setEnabled(False)
         self.ui.lineEdit_SQL_Server_Name.setEnabled(False)
         self.ui.lineEdit_DB_Name.setEnabled(False)
@@ -166,7 +161,89 @@ class MainWindow(QMainWindow):
         self.dict_sql_settings["current_age_struct_area_current"] = \
             self.ui.comboBox_tab_age_struct_area_list.currentText()
 
+        self.ui.pushButton_export_age_structure_calculation_to_sql.setEnabled(True)
+        self.ui.comboBox_export_age_structure_calculation_to_sql.setEnabled(True)
+        self.ui.comboBox_export_age_structure_persent_calculation_to_sql.setEnabled(True)
+
         self.save_dict_file()
+
+        self.age_struct_calculation()
+
+        self.ui.comboBox_export_age_structure_calculation_to_sql.clear()
+        self.ui.comboBox_export_age_structure_calculation_to_sql.addItems(
+            sql_lib.get_list_from_sql(self.dict_sql_settings,
+                                      "SELECT [name] FROM sys.objects WHERE type in (N'U')"
+                                      ))
+
+        self.ui.comboBox_export_age_structure_persent_calculation_to_sql.addItems(
+            sql_lib.get_list_from_sql(self.dict_sql_settings,
+                                      "SELECT [name] FROM sys.objects WHERE type in (N'U')"
+                                      ))
+
+        self.ui.pushButton_export_age_structure_calculation_to_sql.clicked.connect(
+            self.age_struct_calculation_export_to_sql
+        )
+
+
+
+    def age_struct_calculation(self):
+        import protocol_fish_counting_SQL as fc
+
+        try:
+            self.df_age_struct = fc.get_age_struct_from_sql(
+                sql_server=self.dict_sql_settings['current_sql_server'],
+                bio_space=self.dict_sql_settings['current_age_struct_type_current'],
+                cur_year=str(int(float(self.dict_sql_settings['current_age_struct_year_current']))),
+                water_body=self.dict_sql_settings['current_age_struct_area_current'],
+                sql_server_name=self.dict_sql_settings['current_sql_server_name'],
+                data_base_name=self.dict_sql_settings['current_data_base_name']
+            )
+
+            self.ui.textEdit_age_structure_calculation_for_print_dataframe.setText(str(self.df_age_struct))
+
+        except:
+            self.ui.textEdit_age_structure_calculation_for_print_dataframe.setText('Нет данных')
+
+    def age_struct_calculation_export_to_sql(self):
+
+        import protocol_fish_counting_SQL as fc
+
+        try:
+            # export values from save combobox
+            self.dict_sql_settings['current_age_struct_export_to_sql'] = \
+                self.ui.comboBox_export_age_structure_calculation_to_sql.currentText()
+
+            self.dict_sql_settings['current_age_struct_percent_export_to_sql'] = \
+                self.ui.comboBox_export_age_structure_persent_calculation_to_sql.currentText()
+
+            fc.save_age_struct_to_sql(
+                sql_server=self.dict_sql_settings['current_sql_server'],
+                bio_space=self.dict_sql_settings['current_age_struct_type_current'],
+                cur_year=str(int(float(self.dict_sql_settings['current_age_struct_year_current']))),
+                water_body=self.dict_sql_settings['current_age_struct_area_current'],
+                cur_sample_size=sum(self.df_age_struct['count']),
+                sql_server_name=self.dict_sql_settings['current_sql_server_name'],
+                data_base_name=self.dict_sql_settings['current_data_base_name'],
+                current_table=self.dict_sql_settings['current_age_struct_export_to_sql']
+            )
+
+            fc.save_age_percent_to_sql(
+                df_age_count=self.df_age_struct,
+                sql_server=self.dict_sql_settings['current_sql_server'],
+                bio_space=self.dict_sql_settings['current_age_struct_type_current'],
+                cur_year=str(int(float(self.dict_sql_settings['current_age_struct_year_current']))),
+                water_body=self.dict_sql_settings['current_age_struct_area_current'],
+                sql_server_name=self.dict_sql_settings['current_sql_server_name'],
+                data_base_name=self.dict_sql_settings['current_data_base_name'],
+                current_table=self.dict_sql_settings['current_age_struct_percent_export_to_sql']
+            )
+
+            self.ui.textEdit_age_structure_calculation_for_print_dataframe.setText('данные сохранены')
+
+            self.save_dict_file()
+
+        except:
+            self.ui.textEdit_age_structure_calculation_for_print_dataframe.setText('не удалось сохранить данные')
 
     def load_settings_from_file(self):
         import connection_settings
@@ -209,7 +286,9 @@ class MainWindow(QMainWindow):
         'current_age_struct_area_column': "",
         'current_age_struct_type_current': "",
         'current_age_struct_year_current': "",
-        'current_age_struct_area_current': ""
+        'current_age_struct_area_current': "",
+        'current_age_struct_export_to_sql': "",
+        'current_age_struct_percent_export_to_sql': ""
     }
 
     def save_dict_file(self):
@@ -224,6 +303,8 @@ class MainWindow(QMainWindow):
                    f'current_age_struct_type_current = "{self.dict_sql_settings["current_age_struct_type_current"]}"\n'
                    f'current_age_struct_year_current = "{self.dict_sql_settings["current_age_struct_year_current"]}"\n'
                    f'current_age_struct_area_current = "{self.dict_sql_settings["current_age_struct_area_current"]}"\n'
+                   f'current_age_struct_export_to_sql = "{self.dict_sql_settings["current_age_struct_export_to_sql"]}"\n'
+                   f'current_age_struct_percent_export_to_sql = "{self.dict_sql_settings["current_age_struct_percent_export_to_sql"]}"\n'
                    )
         file.close()
 

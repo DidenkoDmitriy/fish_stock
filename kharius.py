@@ -1,7 +1,5 @@
 import protocol_fish_counting_SQL as fc
-
 import initial_variables as init_var
-
 
 
 
