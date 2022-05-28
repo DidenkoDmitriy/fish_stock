@@ -86,6 +86,8 @@ def get_age_struct_from_sql(
     lst_age_count = []
     lst_age_perct = []
 
+    print(df_age_count)
+
     for i in range(max(df_age_count['age']) + 1):
         lst_age_value.append(i)
         lst_age_count.append(sum(df_age_count[df_age_count['age'] == i]['count']))
@@ -140,7 +142,8 @@ def save_age_struct_to_sql(
         water_body: str = 'р.Анюй',
         cur_sample_size: int = 34,
         sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
-        data_base_name: str = 'FISH_WORK'
+        data_base_name: str = 'FISH_WORK',
+        current_table: str = 'age_struct'
 ):
     # считывание данных SQL базы из базы [FISH_WORK].[dbo].[bioanalis$]
     conn_sql_server = pyodbc.connect(
@@ -154,11 +157,12 @@ def save_age_struct_to_sql(
 
     try:
         cursor.execute(
-            f"INSERT INTO age_struct"
+            f"INSERT INTO {current_table}"
             f"([bio_space],[place],[year],[sample_size])"
             f"VALUES (?,?,?,?)",
             (bio_space, water_body, cur_year, cur_sample_size)
         )
+        print(bio_space, water_body, cur_year, cur_sample_size)
     except pyodbc.Error as err:
         results_request = "Ошибка:"+str(err)
     else:
@@ -175,7 +179,8 @@ def save_age_percent_to_sql(
         cur_year: str = '2021',
         water_body: str = 'р. Анюй',
         sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
-        data_base_name: str = 'FISH_WORK'
+        data_base_name: str = 'FISH_WORK',
+        current_table: str = 'age_percent_table'
 ):
     # connecting to SQL base by podbc protocol
     conn_sql_server = pyodbc.connect(
@@ -198,7 +203,7 @@ def save_age_percent_to_sql(
         cursor = conn_sql_server.cursor()
         try:
             cursor.execute(
-                f"INSERT INTO age_percent_table( [conformity_age_struct_id],[age_of_group],[percent_of_group] )"
+                f"INSERT INTO [{current_table}]( [conformity_age_struct_id],[age_of_group],[percent_of_group] )"
                 f"VALUES (?,?,?)",
                 (results_ID[0][0], list(df_age_count['age'])[i], list(df_age_count['percent'])[i])
             )
