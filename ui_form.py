@@ -1,3 +1,4 @@
+
 ################################################################################
 ## Form generated from reading UI file 'ui_form.ui'
 ##
@@ -258,7 +259,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.age_structure_calculation.setCurrentIndex(1)
+        self.age_structure_calculation.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

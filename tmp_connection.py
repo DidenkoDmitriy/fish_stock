@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
     # Sets start sql parameters
     def connection(self):
         self.ui.lineEdit_SQL_Name.setText('SQL Server')
-        self.ui.lineEdit_SQL_Server_Name.setText('LAPTOP-E5Q4G2L1')
+        self.ui.lineEdit_SQL_Server_Name.setText('DESKTOP-6RLRC5B\SQLEXPRESS')
         self.ui.lineEdit_DB_Name.setText('FISH_WORK')
 
     # Return to Step 0.
@@ -155,30 +155,46 @@ class MainWindow(QMainWindow):
 
             self.ui.pushButton_age_struct_choose_column.clicked.connect(self.button_age_struct_choose_columns)
         else:
-            self.ui.comboBox_tab_age_struct_type_list_choose_column.clear()
-            self.ui.comboBox_tab_age_struct_year_list_choose_column.clear()
-            self.ui.comboBox_tab_age_struct_area_list_choose_column.clear()
-            self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(False)
-            self.ui.pushButton_age_struct_choose_column.setEnabled(False)
+            self.bioanalis_checkbox_undo()
 
-            self.ui.checkBox_tab_age_struct_type_list_choose_column.setChecked(False)
-            self.ui.checkBox_tab_age_struct_type_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_type_list.clear()
-            self.ui.comboBox_tab_age_struct_type_list.setEnabled(False)
+    def bioanalis_checkbox_undo(self):
+        # Clearing select columns interface
+        self.ui.comboBox_tab_age_struct_type_list_choose_column.clear()
+        self.ui.comboBox_tab_age_struct_year_list_choose_column.clear()
+        self.ui.comboBox_tab_age_struct_area_list_choose_column.clear()
+        self.ui.comboBox_tab_age_struct_type_list_choose_column.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+        self.ui.comboBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+        self.ui.pushButton_age_struct_choose_column.setEnabled(False)
 
-            self.ui.checkBox_tab_age_struct_year_list_choose_column.setChecked(False)
-            self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_year_list.clear()
-            self.ui.comboBox_tab_age_struct_year_list.setEnabled(False)
+        self.ui.checkBox_tab_age_struct_type_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_type_list_choose_column.setEnabled(False)
 
-            self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
-            self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_area_list.clear()
-            self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
+        # Clearing select values interface
+        self.clear_type()
+        self.clear_area()
+        self.clear_year()
 
-            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
+    def clear_type(self):
+
+        self.ui.comboBox_tab_age_struct_type_list.clear()
+        self.ui.comboBox_tab_age_struct_type_list.setEnabled(False)
+        self.ui.checkBox_tab_age_struct_year_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
+
+    def clear_year(self):
+
+        self.ui.comboBox_tab_age_struct_year_list.clear()
+        self.ui.comboBox_tab_age_struct_year_list.setEnabled(False)
+
+        self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
+        self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
+
+    def clear_area(self):
+
+        self.ui.comboBox_tab_age_struct_area_list.clear()
+        self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
+        self.ui.pushButton_age_struct_choose_values.setEnabled(False)
 
     # Step 3. Setting area, year, type
     def button_age_struct_choose_columns(self):
@@ -233,17 +249,9 @@ class MainWindow(QMainWindow):
 
 
         else:
-            self.ui.checkBox_tab_age_struct_year_list_choose_column.setChecked(False)
-            self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_year_list.clear()
-            self.ui.comboBox_tab_age_struct_year_list.setEnabled(False)
-
-            self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
-            self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_area_list.clear()
-            self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
-
-            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
+            self.clear_type()
+            self.clear_area()
+            self.clear_year()
 
     def year_checkbox_changed(self):
         if self.ui.checkBox_tab_age_struct_year_list_choose_column.checkState():
@@ -270,20 +278,15 @@ class MainWindow(QMainWindow):
 
             self.ui.checkBox_tab_age_struct_area_list_choose_column.stateChanged.connect(self.area_checkbox_changed)
         else:
-            self.ui.checkBox_tab_age_struct_area_list_choose_column.setChecked(False)
-            self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
-            self.ui.comboBox_tab_age_struct_area_list.clear()
-            self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
-
-            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
+            self.clear_area()
+            self.clear_year()
 
     def area_checkbox_changed(self):
         if self.ui.checkBox_tab_age_struct_area_list_choose_column.checkState():
             self.ui.pushButton_age_struct_choose_values.setEnabled(True)
         else:
-            self.ui.pushButton_age_struct_choose_values.setEnabled(False)
-            self.ui.textEdit_age_structure_calculation_for_print_dataframe.clear()
-            self.ui.pushButton_export_age_structure_calculation_to_sql.setEnabled(False)
+            self.clear_year()
+
 
     def button_age_struct_choose_values_pushed(self):
 
