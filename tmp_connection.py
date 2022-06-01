@@ -428,7 +428,6 @@ class MainWindow(QMainWindow):
                    )
         file.close()
 
-
 if __name__ == '__main__':
     app = QApplication()
     window = MainWindow()
