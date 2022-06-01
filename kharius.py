@@ -10,6 +10,7 @@ current_water_places = fc.get_water_place_for_space_from_sql(
         sql_server_name=init_var.current_sql_server_name,
         data_base_name=init_var.current_data_base_name
     )
+
 print(current_water_places)
 input()
 
