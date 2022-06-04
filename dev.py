@@ -2,6 +2,37 @@ import initial_variables as init_var
 import pyodbc
 
 
+def read_register_catch_without_permits(
+    quota='15',
+    year='2020',
+    type_name_column='vbr',
+    develop_name_column='development/tonn',
+    table_name='catch_without_permits$',
+    type_name_fish='хариус',
+    sql_server: str = 'SQL Server',
+    sql_server_name: str = 'DESKTOP-6RLRC5B\SQLEXPRESS',
+    data_base_name: str = 'FISH_WORK'
+):
+    # connecting to SQL base by pyodbc protocol
+    conn_sql_server = pyodbc.connect(
+        f"DRIVER={sql_server};"
+        f"Server={sql_server_name};"
+        f"DATABASE={data_base_name};"
+        f"Trusted_Connection=Yes;"
+    )
+    cursor = conn_sql_server.cursor()
+
+    cursor.execute(
+        f"SELECT [{type_name_column}], SUM([{develop_name_column}])"
+        f"FROM [{table_name}]"
+        f"WHERE {type_name_column} LIKE '{type_name_fish}'"
+        f"GROUP BY {type_name_column}"
+    )
+
+    history_from_register2020 = cursor.fetchall()
+
+    return history_from_register2020
+
 def read_register(
         quota='15',
         year='2020',
@@ -100,6 +131,20 @@ print(
             type_name_column=init_var.type_name_column,
             develop_name_column=init_var.develop_name_column,
             table_name=init_var.table_name,
+            type_name_fish=init_var.type_name_fish,
+            sql_server=init_var.current_sql_server,
+            sql_server_name=init_var.current_sql_server_name,
+            data_base_name=init_var.current_data_base_name
+        )
+    )
+
+print(
+        read_register_catch_without_permits(
+            quota=init_var.quota,
+            year=init_var.year,
+            type_name_column='vbr_name',
+            develop_name_column='production_volume',
+            table_name='FISH_WORK].[dbo].[catch_without_permits$',
             type_name_fish=init_var.type_name_fish,
             sql_server=init_var.current_sql_server,
             sql_server_name=init_var.current_sql_server_name,
