@@ -470,6 +470,14 @@ class MainWindow(QMainWindow):
             self.ui.comboBox_catch_history_choose_type.setEnabled(False)
             self.ui.tableWidget_catch_history_table_of_type_by_year.setEnabled(True)
 
+            self.ui.comboBox_catch_history_choose_year.addItems(
+                sql_lib.get_list_from_sql(self.dict_sql_settings,
+                                          f'SELECT DISTINCT '
+                                          f'[year] '
+                                          f'FROM [{self.ui.comboBox_catch_history_table_choose.currentText()}]'
+                                          f"WHERE [type] LIKE '{self.dict_sql_settings['current_catch_history_choose_type']}'"
+                                          ))
+
         else:
             self.ui.checkBox_catch_history_choose_year.setEnabled(False)
             self.ui.comboBox_catch_history_choose_year.setEnabled(False)
@@ -478,6 +486,7 @@ class MainWindow(QMainWindow):
             self.ui.tableWidget_catch_history_table_of_type_by_year.clear()
             self.ui.tableWidget_catch_history_table_of_type_by_year.setEnabled(False)
             self.ui.comboBox_catch_history_choose_type.setEnabled(True)
+            self.ui.comboBox_catch_history_choose_year.clear()
 
 
     def load_settings_from_file(self):
