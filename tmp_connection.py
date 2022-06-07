@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
     # Sets start sql parameters
     def connection(self):
         self.ui.lineEdit_SQL_Name.setText('SQL Server')
-        self.ui.lineEdit_SQL_Server_Name.setText('DESKTOP-6RLRC5B\SQLEXPRESS')
+        self.ui.lineEdit_SQL_Server_Name.setText('LAPTOP-E5Q4G2L1')
         self.ui.lineEdit_DB_Name.setText('FISH_WORK')
 
     # Return to Step 0.
@@ -59,6 +59,13 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_export_age_structure_persent_calculation_to_sql.setEnabled(False)
         self.ui.comboBox_export_age_structure_calculation_to_sql.clear()
         self.ui.comboBox_export_age_structure_persent_calculation_to_sql.clear()
+
+        self.ui.comboBox_catch_history_table_choose.clear()
+        self.ui.comboBox_catch_history_commercial_register_choose_table.clear()
+        self.ui.comboBox_catch_history_privat_register_choose_table.clear()
+        self.ui.comboBox_catch_history_table_choose.setEnabled(False)
+        self.ui.comboBox_catch_history_commercial_register_choose_table.setEnabled(False)
+        self.ui.comboBox_catch_history_privat_register_choose_table.setEnabled(False)
 
         self.ui.comboBox_tab_age_struct_type_list.clear()
         self.ui.comboBox_tab_age_struct_year_list.clear()
@@ -97,6 +104,9 @@ class MainWindow(QMainWindow):
         self.ui.checkBox_tab_sql_bioanalis_table_list.setEnabled(True)
         self.ui.comboBox_export_age_structure_calculation_to_sql.setEnabled(True)
         self.ui.comboBox_export_age_structure_persent_calculation_to_sql.setEnabled(True)
+        self.ui.comboBox_catch_history_table_choose.setEnabled(True)
+        self.ui.comboBox_catch_history_privat_register_choose_table.setEnabled(True)
+        self.ui.comboBox_catch_history_commercial_register_choose_table.setEnabled(True)
 
         # Completion comboBox data from SQL
         self.ui.comboBox_tab_sql_bioanalis_table_list.clear()
@@ -107,6 +117,10 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_tab_sql_bioanalis_table_list.addItems(var_sql_tbl_list)
         self.ui.comboBox_export_age_structure_calculation_to_sql.addItems(var_sql_tbl_list)
         self.ui.comboBox_export_age_structure_persent_calculation_to_sql.addItems(var_sql_tbl_list)
+        self.ui.comboBox_catch_history_table_choose.addItems(var_sql_tbl_list)
+        self.ui.comboBox_catch_history_privat_register_choose_table.addItems(var_sql_tbl_list)
+        self.ui.comboBox_catch_history_commercial_register_choose_table.addItems(var_sql_tbl_list)
+
 
         # Sets init values in comboboxes
         if var_sql_tbl_list.count('bioanalis$') != 0:
@@ -118,6 +132,16 @@ class MainWindow(QMainWindow):
         if var_sql_tbl_list.count('age_percent_table') != 0:
             self.ui.comboBox_export_age_structure_persent_calculation_to_sql. \
                 setCurrentIndex(var_sql_tbl_list.index('age_percent_table'))
+
+        if var_sql_tbl_list.count('cath_history') != 0:
+            self.ui.comboBox_catch_history_table_choose.\
+                setCurrentIndex(var_sql_tbl_list.index('cath_history'))
+        if var_sql_tbl_list.count('Register$') != 0:
+            self.ui.comboBox_catch_history_privat_register_choose_table.\
+                setCurrentIndex(var_sql_tbl_list.index('Register$'))
+        if var_sql_tbl_list.count('catch_without_permits$') != 0:
+            self.ui.comboBox_catch_history_commercial_register_choose_table.\
+                setCurrentIndex(var_sql_tbl_list.index('catch_without_permits$'))
 
         self.save_dict_file()
 
@@ -299,7 +323,6 @@ class MainWindow(QMainWindow):
             self.ui.pushButton_age_struct_choose_values.setEnabled(True)
             self.ui.comboBox_tab_age_struct_area_list.setEnabled(False)
         else:
-
             self.ui.comboBox_tab_age_struct_area_list.setEnabled(True)
             self.clear_area()
 
