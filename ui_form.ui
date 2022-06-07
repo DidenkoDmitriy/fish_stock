@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_SQL_Base_connect">
        <attribute name="title">
@@ -494,13 +494,6 @@
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="1" column="0" colspan="2">
-          <widget class="QTableView" name="tableView_catch_history_table_of_type_by_year">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" colspan="2">
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
@@ -515,6 +508,13 @@
            </item>
            <item>
             <widget class="QComboBox" name="comboBox_catch_history_choose_type">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="tableWidget_catch_history_table_of_type_by_year">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -552,7 +552,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTableView" name="tableView_catch_history_table_of_type_of_the_year">
+          <widget class="QTableWidget" name="tableWidget_catch_history_table_of_type_of_the_year">
            <property name="enabled">
             <bool>false</bool>
            </property>

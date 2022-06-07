@@ -1,6 +1,6 @@
 import sys
 import SQL_Lib as sql_lib
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from ui_form import Ui_MainWindow
 
 
@@ -25,6 +25,9 @@ class MainWindow(QMainWindow):
         self.ui.checkBox_tab_age_struct_type_list_choose_column.stateChanged.connect(self.type_checkbox_changed)
         self.ui.pushButton_age_struct_choose_column.clicked.connect(self.button_age_struct_choose_columns)
         self.ui.checkBox_tab_sql_bioanalis_table_list.stateChanged.connect(self.push_button_age_struct_choose_table)
+        self.ui.checkBox_catch_history_save_choose_table.stateChanged.connect(
+            self.push_button_catch_history_choose_table)
+        self.ui.checkBox_catch_history_choose_type.stateChanged.connect(self.choose_type_check_box)
         # self.ui.pushButton_sql_bioanalis_choose_table.clicked.connect(self.push_button_age_struct_choose_table)
 
     def connection_checkbox_changed(self):
@@ -86,6 +89,8 @@ class MainWindow(QMainWindow):
         self.ui.checkBox_tab_age_struct_year_list_choose_column.setEnabled(False)
         self.ui.checkBox_tab_age_struct_area_list_choose_column.setEnabled(False)
 
+        self.ui.checkBox_catch_history_save_choose_table.setChecked(False)
+        self.ui.checkBox_catch_history_save_choose_table.setEnabled(False)
     # Step 1. Function to set SQL parameters and dynamic interface working
     def pushing_connecting_button(self):
         # Set SQL parameters
@@ -143,7 +148,7 @@ class MainWindow(QMainWindow):
             self.ui.comboBox_catch_history_commercial_register_choose_table.\
                 setCurrentIndex(var_sql_tbl_list.index('catch_without_permits$'))
 
-        self.ui.checkBox_catch_history_save_choose_table.setEnabled()
+        self.ui.checkBox_catch_history_save_choose_table.setEnabled(True)
 
         self.save_dict_file()
 
@@ -390,6 +395,9 @@ class MainWindow(QMainWindow):
             self.ui.textEdit_age_structure_calculation_for_print_dataframe.toPlainText() + ' 1 ')
         self.save_dict_file()
 
+
+
+
     def push_button_catch_history_choose_table(self):
         if self.ui.checkBox_catch_history_save_choose_table.checkState():
             self.dict_sql_settings['current_catch_history_choose_table'] = \
@@ -398,6 +406,78 @@ class MainWindow(QMainWindow):
                 self.ui.comboBox_catch_history_commercial_register_choose_table.currentText()
             self.dict_sql_settings['current_catch_history_privat_register_choose_table'] = \
                 self.ui.comboBox_catch_history_privat_register_choose_table.currentText()
+
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setEnabled(True)
+            self.ui.comboBox_catch_history_choose_type.setEnabled(True)
+            self.ui.checkBox_catch_history_choose_type.setEnabled(True)
+            self.ui.comboBox_catch_history_table_choose.setEnabled(False)
+            self.ui.comboBox_catch_history_commercial_register_choose_table.setEnabled(False)
+            self.ui.comboBox_catch_history_privat_register_choose_table.setEnabled(False)
+
+            self.ui.comboBox_catch_history_choose_type.clear()
+            # найти откуда получать список видов
+            self.ui.comboBox_catch_history_choose_type.addItems(
+                sql_lib.get_list_from_sql(self.dict_sql_settings,
+                                          f'SELECT DISTINCT '
+                                          f'[type] '
+                                          f'FROM [{self.ui.comboBox_catch_history_table_choose.currentText()}]'
+                                          ))
+
+            self.save_dict_file()
+
+        else:
+            self.ui.comboBox_catch_history_table_choose.setEnabled(True)
+            self.ui.comboBox_catch_history_commercial_register_choose_table.setEnabled(True)
+            self.ui.comboBox_catch_history_privat_register_choose_table.setEnabled(True)
+            self.ui.comboBox_catch_history_choose_type.clear()
+            self.ui.checkBox_catch_history_choose_type.setChecked(False)
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setEnabled(False)
+            self.ui.comboBox_catch_history_choose_type.setEnabled(False)
+            self.ui.checkBox_catch_history_choose_type.setEnabled(False)
+
+    def choose_type_check_box(self):
+        if self.ui.checkBox_catch_history_choose_type.checkState():
+            self.dict_sql_settings['current_catch_history_choose_type']\
+                = self.ui.comboBox_catch_history_choose_type.currentText()
+            self.save_dict_file()
+
+            self.ui.checkBox_catch_history_choose_year.setEnabled(True)
+            self.ui.comboBox_catch_history_choose_year.setEnabled(True)
+            self.ui.tableWidget_catch_history_table_of_type_of_the_year.setEnabled(True)
+            self.ui.pushButton_export_catch_history_to_sql.setEnabled(True)
+
+            type_catch_history_table = sql_lib.get_tuple_list_from_sql(self.dict_sql_settings,
+                                      f"SELECT [type], [year], [fishing_stock_t], [quota_t], [cath_t]  "
+                                      f"FROM {self.dict_sql_settings['current_catch_history_choose_table']} "
+                                      f"WHERE [type] LIKE '{self.dict_sql_settings['current_catch_history_choose_type']}'"
+                                      )
+
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setRowCount(len(type_catch_history_table))
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setColumnCount(5)
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setColumnWidth(1, 50)
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setColumnWidth(2, 50)
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setColumnWidth(3, 50)
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setColumnWidth(4, 50)
+            column_column = 0
+            for column in type_catch_history_table:
+                self.ui.tableWidget_catch_history_table_of_type_by_year.setItem(column_column, 0, QTableWidgetItem(f'{column[0]}'))
+                self.ui.tableWidget_catch_history_table_of_type_by_year.setItem(column_column, 1, QTableWidgetItem(f'{column[1]}'))
+                self.ui.tableWidget_catch_history_table_of_type_by_year.setItem(column_column, 2, QTableWidgetItem(f'{column[2]}'))
+                self.ui.tableWidget_catch_history_table_of_type_by_year.setItem(column_column, 3, QTableWidgetItem(f'{column[3]}'))
+                self.ui.tableWidget_catch_history_table_of_type_by_year.setItem(column_column, 4, QTableWidgetItem(f'{column[4]}'))
+                column_column += 1
+
+            self.ui.comboBox_catch_history_choose_type.setEnabled(False)
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setEnabled(True)
+
+        else:
+            self.ui.checkBox_catch_history_choose_year.setEnabled(False)
+            self.ui.comboBox_catch_history_choose_year.setEnabled(False)
+            self.ui.tableWidget_catch_history_table_of_type_of_the_year.setEnabled(False)
+            self.ui.pushButton_export_catch_history_to_sql.setEnabled(False)
+            self.ui.tableWidget_catch_history_table_of_type_by_year.clear()
+            self.ui.tableWidget_catch_history_table_of_type_by_year.setEnabled(False)
+            self.ui.comboBox_catch_history_choose_type.setEnabled(True)
 
 
     def load_settings_from_file(self):
@@ -413,23 +493,6 @@ class MainWindow(QMainWindow):
         self.dict_sql_settings["current_age_struct_type_current"] = connection_settings.current_age_struct_type_current
         self.dict_sql_settings["current_age_struct_year_current"] = connection_settings.current_age_struct_year_current
         self.dict_sql_settings["current_age_struct_area_current"] = connection_settings.current_age_struct_area_current
-
-    # def combobox_age_struct_list(self):
-    #
-    #     self.ui.comboBox_tab_age_struct_type_list_choose_column.currentText()
-    #     self.ui.comboBox_tab_age_struct_year_list_choose_column.currentText()
-    #     self.ui.comboBox_tab_age_struct_area_list_choose_column.currentText()
-    #
-    #
-    # def button_age_struct_columns(self):
-    #     self.dict_sql_settings[
-    #         'current_age_struct_type_data_list'] = self.ui.comboBox_tab_age_struct_type_list.currentText()
-    #     self.dict_sql_settings[
-    #         'current_age_struct_year_data_list'] = self.ui.comboBox_tab_age_struct_year_list.currentText()
-    #     self.dict_sql_settings[
-    #         'current_age_struct_area_data_list'] = self.ui.comboBox_tab_age_struct_area_list.currentText()
-    #     self.save_dict_file()
-    #
 
     dict_sql_settings = {
         'current_sql_server': "SQL Server",
@@ -447,6 +510,7 @@ class MainWindow(QMainWindow):
         'current_catch_history_choose_table': "",
         'current_catch_history_commercial_register_choose_table': "",
         'current_catch_history_privat_register_choose_table': "",
+        'current_catch_history_choose_type': ""
     }
 
     def save_dict_file(self):
@@ -465,7 +529,8 @@ class MainWindow(QMainWindow):
                    f'current_age_struct_percent_export_to_sql = "{self.dict_sql_settings["current_age_struct_percent_export_to_sql"]}"\n'
                    f'current_catch_history_choose_table = "{self.dict_sql_settings["current_catch_history_choose_table"]}"\n'
                    f'current_catch_history_commercial_register_choose_table = "{self.dict_sql_settings["current_catch_history_commercial_register_choose_table"]}"\n'
-                   f'current_catch_history_privat_register_choose_table = "{self.dict_sql_settings["current_catch_history_privat_register_choose_table"]}"\n')
+                   f'current_catch_history_privat_register_choose_table = "{self.dict_sql_settings["current_catch_history_privat_register_choose_table"]}"\n'
+                   f'current_catch_history_choose_type = "{self.dict_sql_settings["current_catch_history_choose_type"]}"\n')
         file.close()
 
 if __name__ == '__main__':
