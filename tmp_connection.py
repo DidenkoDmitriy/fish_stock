@@ -143,6 +143,8 @@ class MainWindow(QMainWindow):
             self.ui.comboBox_catch_history_commercial_register_choose_table.\
                 setCurrentIndex(var_sql_tbl_list.index('catch_without_permits$'))
 
+        self.ui.checkBox_catch_history_save_choose_table.setEnabled()
+
         self.save_dict_file()
 
     # Step 2. SQL connected and bioanalyse Table chosen.
@@ -388,6 +390,16 @@ class MainWindow(QMainWindow):
             self.ui.textEdit_age_structure_calculation_for_print_dataframe.toPlainText() + ' 1 ')
         self.save_dict_file()
 
+    def push_button_catch_history_choose_table(self):
+        if self.ui.checkBox_catch_history_save_choose_table.checkState():
+            self.dict_sql_settings['current_catch_history_choose_table'] = \
+                self.ui.comboBox_catch_history_table_choose.currentText()
+            self.dict_sql_settings['current_catch_history_commercial_register_choose_table'] = \
+                self.ui.comboBox_catch_history_commercial_register_choose_table.currentText()
+            self.dict_sql_settings['current_catch_history_privat_register_choose_table'] = \
+                self.ui.comboBox_catch_history_privat_register_choose_table.currentText()
+
+
     def load_settings_from_file(self):
         import connection_settings
 
@@ -431,7 +443,10 @@ class MainWindow(QMainWindow):
         'current_age_struct_year_current': "",
         'current_age_struct_area_current': "",
         'current_age_struct_export_to_sql': "",
-        'current_age_struct_percent_export_to_sql': ""
+        'current_age_struct_percent_export_to_sql': "",
+        'current_catch_history_choose_table': "",
+        'current_catch_history_commercial_register_choose_table': "",
+        'current_catch_history_privat_register_choose_table': "",
     }
 
     def save_dict_file(self):
@@ -448,7 +463,9 @@ class MainWindow(QMainWindow):
                    f'current_age_struct_area_current = "{self.dict_sql_settings["current_age_struct_area_current"]}"\n'
                    f'current_age_struct_export_to_sql = "{self.dict_sql_settings["current_age_struct_export_to_sql"]}"\n'
                    f'current_age_struct_percent_export_to_sql = "{self.dict_sql_settings["current_age_struct_percent_export_to_sql"]}"\n'
-                   )
+                   f'current_catch_history_choose_table = "{self.dict_sql_settings["current_catch_history_choose_table"]}"\n'
+                   f'current_catch_history_commercial_register_choose_table = "{self.dict_sql_settings["current_catch_history_commercial_register_choose_table"]}"\n'
+                   f'current_catch_history_privat_register_choose_table = "{self.dict_sql_settings["current_catch_history_privat_register_choose_table"]}"\n')
         file.close()
 
 if __name__ == '__main__':

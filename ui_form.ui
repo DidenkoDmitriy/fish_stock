@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_SQL_Base_connect">
        <attribute name="title">
@@ -234,7 +234,7 @@
           <x>430</x>
           <y>240</y>
           <width>391</width>
-          <height>155</height>
+          <height>181</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -253,40 +253,42 @@
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
-           <item>
-            <widget class="QLabel" name="label_choose_privat_register_table">
-             <property name="text">
-              <string>Выберете таблицу регистр непромыслового вылова</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_9">
-             <item>
-              <widget class="QComboBox" name="comboBox_catch_history_privat_register_choose_table">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_choose_commercial_register_table">
-               <property name="text">
-                <string>Выберете таблицу регистр промыслового вылова</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBox_catch_history_commercial_register_choose_table">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
+          <widget class="QLabel" name="label_choose_commercial_register_table">
+           <property name="text">
+            <string>Выберете таблицу регистр промыслового вылова</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_catch_history_commercial_register_choose_table">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_choose_privat_register_table">
+           <property name="text">
+            <string>Выберете таблицу регистр непромыслового вылова</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_catch_history_privat_register_choose_table">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_catch_history_save_choose_table">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Сохранить выбор таблиц</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
