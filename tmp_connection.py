@@ -28,6 +28,7 @@ class MainWindow(QMainWindow):
         self.ui.checkBox_catch_history_save_choose_table.stateChanged.connect(
             self.push_button_catch_history_choose_table)
         self.ui.checkBox_catch_history_choose_type.stateChanged.connect(self.choose_type_check_box)
+        self.ui.checkBox_catch_history_choose_year.stateChanged.connect(self.choose_year_check_box)
         # self.ui.pushButton_sql_bioanalis_choose_table.clicked.connect(self.push_button_age_struct_choose_table)
 
     def connection_checkbox_changed(self):
@@ -444,7 +445,6 @@ class MainWindow(QMainWindow):
             self.ui.checkBox_catch_history_choose_year.setEnabled(True)
             self.ui.comboBox_catch_history_choose_year.setEnabled(True)
             self.ui.tableWidget_catch_history_table_of_type_of_the_year.setEnabled(True)
-            self.ui.pushButton_export_catch_history_to_sql.setEnabled(True)
 
             type_catch_history_table = sql_lib.get_tuple_list_from_sql(self.dict_sql_settings,
                                       f"SELECT [type], [year], [fishing_stock_t], [quota_t], [cath_t]  "
@@ -482,26 +482,34 @@ class MainWindow(QMainWindow):
             self.ui.checkBox_catch_history_choose_year.setEnabled(False)
             self.ui.comboBox_catch_history_choose_year.setEnabled(False)
             self.ui.tableWidget_catch_history_table_of_type_of_the_year.setEnabled(False)
-            self.ui.pushButton_export_catch_history_to_sql.setEnabled(False)
             self.ui.tableWidget_catch_history_table_of_type_by_year.clear()
             self.ui.tableWidget_catch_history_table_of_type_by_year.setEnabled(False)
             self.ui.comboBox_catch_history_choose_type.setEnabled(True)
             self.ui.comboBox_catch_history_choose_year.clear()
+            self.ui.checkBox_catch_history_choose_year.setChecked(False)
 
+    def choose_year_check_box(self):
+        if self.ui.checkBox_catch_history_choose_year.checkState():
+            self.dict_sql_settings['current_catch_history_choose_year'] = \
+                self.ui.comboBox_catch_history_choose_year.currentText()
+            self.save_dict_file()
+            self.ui.pushButton_export_catch_history_to_sql.setEnabled(True)
+        else:
+            self.ui.pushButton_export_catch_history_to_sql.setEnabled(False)
 
-    def load_settings_from_file(self):
-        import connection_settings
-
-        self.dict_sql_settings["current_sql_server"] = connection_settings.current_sql_server
-        self.dict_sql_settings["current_sql_server_name"] = connection_settings.current_sql_server_name
-        self.dict_sql_settings["current_data_base_name"] = connection_settings.current_data_base_name
-        self.dict_sql_settings["current_bioanalis_table"] = connection_settings.current_bioanalis_table
-        self.dict_sql_settings["current_age_struct_type_column"] = connection_settings.current_age_struct_type_column
-        self.dict_sql_settings["current_age_struct_year_column"] = connection_settings.current_age_struct_year_column
-        self.dict_sql_settings["current_age_struct_area_column"] = connection_settings.current_age_struct_area_column
-        self.dict_sql_settings["current_age_struct_type_current"] = connection_settings.current_age_struct_type_current
-        self.dict_sql_settings["current_age_struct_year_current"] = connection_settings.current_age_struct_year_current
-        self.dict_sql_settings["current_age_struct_area_current"] = connection_settings.current_age_struct_area_current
+    # def load_settings_from_file(self):
+    #     import connection_settings
+    #
+    #     self.dict_sql_settings["current_sql_server"] = connection_settings.current_sql_server
+    #     self.dict_sql_settings["current_sql_server_name"] = connection_settings.current_sql_server_name
+    #     self.dict_sql_settings["current_data_base_name"] = connection_settings.current_data_base_name
+    #     self.dict_sql_settings["current_bioanalis_table"] = connection_settings.current_bioanalis_table
+    #     self.dict_sql_settings["current_age_struct_type_column"] = connection_settings.current_age_struct_type_column
+    #     self.dict_sql_settings["current_age_struct_year_column"] = connection_settings.current_age_struct_year_column
+    #     self.dict_sql_settings["current_age_struct_area_column"] = connection_settings.current_age_struct_area_column
+    #     self.dict_sql_settings["current_age_struct_type_current"] = connection_settings.current_age_struct_type_current
+    #     self.dict_sql_settings["current_age_struct_year_current"] = connection_settings.current_age_struct_year_current
+    #     self.dict_sql_settings["current_age_struct_area_current"] = connection_settings.current_age_struct_area_current
 
     dict_sql_settings = {
         'current_sql_server': "SQL Server",
@@ -519,7 +527,8 @@ class MainWindow(QMainWindow):
         'current_catch_history_choose_table': "",
         'current_catch_history_commercial_register_choose_table': "",
         'current_catch_history_privat_register_choose_table': "",
-        'current_catch_history_choose_type': ""
+        'current_catch_history_choose_type': "",
+        'current_catch_history_choose_year': ""
     }
 
     def save_dict_file(self):
@@ -539,7 +548,8 @@ class MainWindow(QMainWindow):
                    f'current_catch_history_choose_table = "{self.dict_sql_settings["current_catch_history_choose_table"]}"\n'
                    f'current_catch_history_commercial_register_choose_table = "{self.dict_sql_settings["current_catch_history_commercial_register_choose_table"]}"\n'
                    f'current_catch_history_privat_register_choose_table = "{self.dict_sql_settings["current_catch_history_privat_register_choose_table"]}"\n'
-                   f'current_catch_history_choose_type = "{self.dict_sql_settings["current_catch_history_choose_type"]}"\n')
+                   f'current_catch_history_choose_type = "{self.dict_sql_settings["current_catch_history_choose_type"]}"\n'
+                   f'current_catch_history_choose_year = "{self.dict_sql_settings["current_catch_history_choose_year"]}"\n')
         file.close()
 
 if __name__ == '__main__':
