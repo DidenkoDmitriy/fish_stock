@@ -18,8 +18,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGraphicsView,
     QGridLayout, QHeaderView, QLabel, QLineEdit,
     QMainWindow, QMenuBar, QPushButton, QSizePolicy,
-    QStatusBar, QTabWidget, QTableView, QTextEdit,
-    QVBoxLayout, QWidget)
+    QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
+    QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -122,7 +122,7 @@ class Ui_MainWindow(object):
         self.checkBox_tab_sql_connect_SQL_DB.setChecked(False)
         self.verticalLayoutWidget_3 = QWidget(self.tab_SQL_Base_connect)
         self.verticalLayoutWidget_3.setObjectName(u"verticalLayoutWidget_3")
-        self.verticalLayoutWidget_3.setGeometry(QRect(430, 240, 391, 155))
+        self.verticalLayoutWidget_3.setGeometry(QRect(430, 240, 391, 181))
         self.verticalLayout_7 = QVBoxLayout(self.verticalLayoutWidget_3)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
@@ -137,37 +137,33 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.comboBox_catch_history_table_choose)
 
-        self.verticalLayout_8 = QVBoxLayout()
-        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.label_choose_privat_register_table = QLabel(self.verticalLayoutWidget_3)
-        self.label_choose_privat_register_table.setObjectName(u"label_choose_privat_register_table")
-
-        self.verticalLayout_8.addWidget(self.label_choose_privat_register_table)
-
-        self.verticalLayout_9 = QVBoxLayout()
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.comboBox_catch_history_privat_register_choose_table = QComboBox(self.verticalLayoutWidget_3)
-        self.comboBox_catch_history_privat_register_choose_table.setObjectName(u"comboBox_catch_history_privat_register_choose_table")
-        self.comboBox_catch_history_privat_register_choose_table.setEnabled(False)
-
-        self.verticalLayout_9.addWidget(self.comboBox_catch_history_privat_register_choose_table)
-
         self.label_choose_commercial_register_table = QLabel(self.verticalLayoutWidget_3)
         self.label_choose_commercial_register_table.setObjectName(u"label_choose_commercial_register_table")
 
-        self.verticalLayout_9.addWidget(self.label_choose_commercial_register_table)
+        self.verticalLayout_7.addWidget(self.label_choose_commercial_register_table)
 
         self.comboBox_catch_history_commercial_register_choose_table = QComboBox(self.verticalLayoutWidget_3)
         self.comboBox_catch_history_commercial_register_choose_table.setObjectName(u"comboBox_catch_history_commercial_register_choose_table")
         self.comboBox_catch_history_commercial_register_choose_table.setEnabled(False)
 
-        self.verticalLayout_9.addWidget(self.comboBox_catch_history_commercial_register_choose_table)
+        self.verticalLayout_7.addWidget(self.comboBox_catch_history_commercial_register_choose_table)
 
+        self.label_choose_privat_register_table = QLabel(self.verticalLayoutWidget_3)
+        self.label_choose_privat_register_table.setObjectName(u"label_choose_privat_register_table")
 
-        self.verticalLayout_8.addLayout(self.verticalLayout_9)
+        self.verticalLayout_7.addWidget(self.label_choose_privat_register_table)
 
+        self.comboBox_catch_history_privat_register_choose_table = QComboBox(self.verticalLayoutWidget_3)
+        self.comboBox_catch_history_privat_register_choose_table.setObjectName(u"comboBox_catch_history_privat_register_choose_table")
+        self.comboBox_catch_history_privat_register_choose_table.setEnabled(False)
 
-        self.verticalLayout_7.addLayout(self.verticalLayout_8)
+        self.verticalLayout_7.addWidget(self.comboBox_catch_history_privat_register_choose_table)
+
+        self.checkBox_catch_history_save_choose_table = QCheckBox(self.verticalLayoutWidget_3)
+        self.checkBox_catch_history_save_choose_table.setObjectName(u"checkBox_catch_history_save_choose_table")
+        self.checkBox_catch_history_save_choose_table.setEnabled(False)
+
+        self.verticalLayout_7.addWidget(self.checkBox_catch_history_save_choose_table)
 
         self.age_structure_calculation.addTab(self.tab_SQL_Base_connect, "")
         self.tab_age_struct = QWidget()
@@ -295,12 +291,6 @@ class Ui_MainWindow(object):
         self.gridLayout_3 = QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.tableView_catch_history_table_of_type_by_year = QTableView(self.gridLayoutWidget_2)
-        self.tableView_catch_history_table_of_type_by_year.setObjectName(u"tableView_catch_history_table_of_type_by_year")
-        self.tableView_catch_history_table_of_type_by_year.setEnabled(False)
-
-        self.gridLayout_3.addWidget(self.tableView_catch_history_table_of_type_by_year, 1, 0, 1, 2)
-
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.checkBox_catch_history_choose_type = QCheckBox(self.gridLayoutWidget_2)
@@ -314,6 +304,12 @@ class Ui_MainWindow(object):
         self.comboBox_catch_history_choose_type.setEnabled(False)
 
         self.verticalLayout_2.addWidget(self.comboBox_catch_history_choose_type)
+
+        self.tableWidget_catch_history_table_of_type_by_year = QTableWidget(self.gridLayoutWidget_2)
+        self.tableWidget_catch_history_table_of_type_by_year.setObjectName(u"tableWidget_catch_history_table_of_type_by_year")
+        self.tableWidget_catch_history_table_of_type_by_year.setEnabled(False)
+
+        self.verticalLayout_2.addWidget(self.tableWidget_catch_history_table_of_type_by_year)
 
 
         self.gridLayout_3.addLayout(self.verticalLayout_2, 0, 0, 1, 2)
@@ -336,11 +332,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addWidget(self.comboBox_catch_history_choose_year)
 
-        self.tableView_catch_history_table_of_type_of_the_year = QTableView(self.verticalLayoutWidget_2)
-        self.tableView_catch_history_table_of_type_of_the_year.setObjectName(u"tableView_catch_history_table_of_type_of_the_year")
-        self.tableView_catch_history_table_of_type_of_the_year.setEnabled(False)
+        self.tableWidget_catch_history_table_of_type_of_the_year = QTableWidget(self.verticalLayoutWidget_2)
+        self.tableWidget_catch_history_table_of_type_of_the_year.setObjectName(u"tableWidget_catch_history_table_of_type_of_the_year")
+        self.tableWidget_catch_history_table_of_type_of_the_year.setEnabled(False)
 
-        self.verticalLayout_4.addWidget(self.tableView_catch_history_table_of_type_of_the_year)
+        self.verticalLayout_4.addWidget(self.tableWidget_catch_history_table_of_type_of_the_year)
 
         self.pushButton_export_catch_history_to_sql = QPushButton(self.verticalLayoutWidget_2)
         self.pushButton_export_catch_history_to_sql.setObjectName(u"pushButton_export_catch_history_to_sql")
@@ -372,7 +368,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.age_structure_calculation.setCurrentIndex(0)
+        self.age_structure_calculation.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -388,8 +384,9 @@ class Ui_MainWindow(object):
         self.label_export_age_structure_persent_calculation_to_sql.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 age_struct_persent \u0434\u043b\u044f \u044d\u043a\u0441\u043f\u043e\u0440\u0442\u0430", None))
         self.checkBox_tab_sql_connect_SQL_DB.setText(QCoreApplication.translate("MainWindow", u"Connected", None))
         self.label_choose_catch_history_table.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0435\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u0432\u044b\u043b\u043e\u0432\u0430", None))
-        self.label_choose_privat_register_table.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0435\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 \u0440\u0435\u0433\u0438\u0441\u0442\u0440 \u043d\u0435\u043f\u0440\u043e\u043c\u044b\u0441\u043b\u043e\u0432\u043e\u0433\u043e \u0432\u044b\u043b\u043e\u0432\u0430", None))
         self.label_choose_commercial_register_table.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0435\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 \u0440\u0435\u0433\u0438\u0441\u0442\u0440 \u043f\u0440\u043e\u043c\u044b\u0441\u043b\u043e\u0432\u043e\u0433\u043e \u0432\u044b\u043b\u043e\u0432\u0430", None))
+        self.label_choose_privat_register_table.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0435\u0442\u0435 \u0442\u0430\u0431\u043b\u0438\u0446\u0443 \u0440\u0435\u0433\u0438\u0441\u0442\u0440 \u043d\u0435\u043f\u0440\u043e\u043c\u044b\u0441\u043b\u043e\u0432\u043e\u0433\u043e \u0432\u044b\u043b\u043e\u0432\u0430", None))
+        self.checkBox_catch_history_save_choose_table.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u0432\u044b\u0431\u043e\u0440 \u0442\u0430\u0431\u043b\u0438\u0446", None))
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_SQL_Base_connect), QCoreApplication.translate("MainWindow", u"SQL DB", None))
         self.pushButton_age_struct_choose_column.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u043e\u0440 \u0441\u0442\u043e\u043b\u0431\u0446\u043e\u0432", None))
         self.label_tab_age_struct_type_list.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0438\u0434\u044b", None))

@@ -234,7 +234,7 @@
           <x>430</x>
           <y>240</y>
           <width>391</width>
-          <height>155</height>
+          <height>181</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -253,40 +253,42 @@
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
-           <item>
-            <widget class="QLabel" name="label_choose_privat_register_table">
-             <property name="text">
-              <string>Выберете таблицу регистр непромыслового вылова</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_9">
-             <item>
-              <widget class="QComboBox" name="comboBox_catch_history_privat_register_choose_table">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_choose_commercial_register_table">
-               <property name="text">
-                <string>Выберете таблицу регистр промыслового вылова</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBox_catch_history_commercial_register_choose_table">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
+          <widget class="QLabel" name="label_choose_commercial_register_table">
+           <property name="text">
+            <string>Выберете таблицу регистр промыслового вылова</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_catch_history_commercial_register_choose_table">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_choose_privat_register_table">
+           <property name="text">
+            <string>Выберете таблицу регистр непромыслового вылова</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_catch_history_privat_register_choose_table">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_catch_history_save_choose_table">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Сохранить выбор таблиц</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -492,13 +494,6 @@
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="1" column="0" colspan="2">
-          <widget class="QTableView" name="tableView_catch_history_table_of_type_by_year">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0" colspan="2">
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
@@ -513,6 +508,13 @@
            </item>
            <item>
             <widget class="QComboBox" name="comboBox_catch_history_choose_type">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="tableWidget_catch_history_table_of_type_by_year">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -550,7 +552,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QTableView" name="tableView_catch_history_table_of_type_of_the_year">
+          <widget class="QTableWidget" name="tableWidget_catch_history_table_of_type_of_the_year">
            <property name="enabled">
             <bool>false</bool>
            </property>
