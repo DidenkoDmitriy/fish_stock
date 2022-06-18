@@ -565,20 +565,6 @@ class MainWindow(QMainWindow):
             self.ui.tableWidget_catch_history_table_of_type_of_the_year.clear()
             self.ui.tableWidget_catch_history_table_of_type_of_the_year.setEnabled(False)
 
-    # def load_settings_from_file(self):
-    #     import connection_settings
-    #
-    #     self.dict_sql_settings["current_sql_server"] = connection_settings.current_sql_server
-    #     self.dict_sql_settings["current_sql_server_name"] = connection_settings.current_sql_server_name
-    #     self.dict_sql_settings["current_data_base_name"] = connection_settings.current_data_base_name
-    #     self.dict_sql_settings["current_bioanalis_table"] = connection_settings.current_bioanalis_table
-    #     self.dict_sql_settings["current_age_struct_type_column"] = connection_settings.current_age_struct_type_column
-    #     self.dict_sql_settings["current_age_struct_year_column"] = connection_settings.current_age_struct_year_column
-    #     self.dict_sql_settings["current_age_struct_area_column"] = connection_settings.current_age_struct_area_column
-    #     self.dict_sql_settings["current_age_struct_type_current"] = connection_settings.current_age_struct_type_current
-    #     self.dict_sql_settings["current_age_struct_year_current"] = connection_settings.current_age_struct_year_current
-    #     self.dict_sql_settings["current_age_struct_area_current"] = connection_settings.current_age_struct_area_current
-
     dict_sql_settings = {
         'current_sql_server': "SQL Server",
         'current_sql_server_name': "DESKTOP-6RLRC5B\SQLEXPRESS",

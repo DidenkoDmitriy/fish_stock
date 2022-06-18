@@ -570,7 +570,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QGraphicsView" name="graphicsView_catch_history_graph_of_type_by_year">
+       <widget class="PlotWidget" name="graphicsView_catch_history_graph_of_type_by_year">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -607,6 +607,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlotWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
