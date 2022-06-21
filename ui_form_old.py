@@ -1,140 +1,32 @@
 # -*- coding: utf-8 -*-
-from PySide6.QtCore import QRect, QCoreApplication, QMetaObject
-from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QWidget, QGridLayout, QTabWidget, QLabel, QLineEdit, QVBoxLayout, QCheckBox, QComboBox, \
-    QSizePolicy, QTextEdit, QPushButton, QTableWidget, QGraphicsView, QMenuBar, QStatusBar
 
+################################################################################
+## Form generated from reading UI file 'ui_form.ui'
+##
+## Created by: Qt User Interface Compiler version 6.3.0
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
-class UiMainWindow:
-    def __init__(self, main_window):
-        # Initialize central widget
-        self.central_widget = QWidget(main_window)
-        self.central_widget.setObjectName("central_widget")
-        # !!! may be incorrect place
-        main_window.setCentralWidget(self.central_widget)
-        main_window.setWindowTitle("Fish")
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGraphicsView,
+    QGridLayout, QHeaderView, QLabel, QLineEdit,
+    QMainWindow, QMenuBar, QPushButton, QSizePolicy,
+    QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
+    QTextEdit, QVBoxLayout, QWidget)
 
-        # Initialize grid
-        self.grid_layout = QGridLayout(self.central_widget)
-        self.grid_layout.setObjectName("grid_layout")
-
-        # Initialize tab SQL base connect
-        self.tab_SQL_Base_connect = QWidget()
-        self.tab_SQL_Base_connect.setObjectName("tab_SQL_Base_connect")
-
-        # Initialize tab_widget + tabs adding
-        # tab_widget contains tabs (individually)
-        # !!!! rename age_structure_calculation to tab_widget
-        self.tab_widget = QTabWidget(self.central_widget)
-        self.tab_widget.setObjectName("tab_widget")
-        self.tab_widget.setEnabled(True)
-        self.tab_widget.addTab(self.tab_SQL_Base_connect, "")
-        self.tab_widget.setTabText(self.tab_widget.indexOf(self.tab_SQL_Base_connect), "SQL DB")
-
-        # credentials sections
-        font = QFont()
-        font.setFamilies([u"Times New Roman"])
-        font.setPointSize(12)
-        font.setBold(True)
-        self.label_DB_Name = QLabel(self.tab_SQL_Base_connect)
-        self.label_DB_Name.setObjectName("label_DB_Name")
-        self.label_DB_Name.setGeometry(QRect(10, 130, 131, 51))
-        self.label_DB_Name.setFont(font)
-        self.label_DB_Name.setStyleSheet("background-color: rgb(85, 170, 255);")
-        self.label_DB_Name.setMargin(10)
-        self.label_DB_Name.setText("DB Name")
-        self.lineEdit_DB_Name = QLineEdit(self.tab_SQL_Base_connect)
-        self.lineEdit_DB_Name.setObjectName("lineEdit_DB_Name")
-        self.lineEdit_DB_Name.setGeometry(QRect(150, 130, 671, 51))
-
-        self.label_SQL_Server_Name = QLabel(self.tab_SQL_Base_connect)
-        self.label_SQL_Server_Name.setObjectName("label_SQL_Server_Name")
-        self.label_SQL_Server_Name.setGeometry(QRect(10, 70, 131, 51))
-        self.label_SQL_Server_Name.setFont(font)
-        self.label_SQL_Server_Name.setStyleSheet("background-color: rgb(85, 170, 255);")
-        self.label_SQL_Server_Name.setMargin(10)
-        self.label_SQL_Server_Name.setText("Server Name")
-        self.lineEdit_SQL_Server_Name = QLineEdit(self.tab_SQL_Base_connect)
-        self.lineEdit_SQL_Server_Name.setObjectName("lineEdit_SQL_Server_Name")
-        self.lineEdit_SQL_Server_Name.setGeometry(QRect(150, 70, 671, 51))
-
-        self.label_SQL_Name = QLabel(self.tab_SQL_Base_connect)
-        self.label_SQL_Name.setObjectName("label_SQL_Name")
-        self.label_SQL_Name.setGeometry(QRect(10, 10, 131, 51))
-        self.label_SQL_Name.setFont(font)
-        self.label_SQL_Name.setStyleSheet("background-color: rgb(85, 170, 255);")
-        self.label_SQL_Name.setMargin(10)
-        self.lineEdit_SQL_Name = QLineEdit(self.tab_SQL_Base_connect)
-        self.lineEdit_SQL_Name.setObjectName("lineEdit_SQL_Name")
-        self.lineEdit_SQL_Name.setGeometry(QRect(150, 10, 671, 51))
-        self.label_SQL_Name.setText("SQL Server")
-
-        # vertical layouts sections (tab SQL DB)
-        # !!! rename verticalLayoutWidget_6 to sql_db_vertical_layout_widget_1
-        # !!! rename verticalLayout_6 to sql_db_vertical_layout_1
-        self.sql_db_vertical_layout_widget_1 = QWidget(self.tab_SQL_Base_connect)
-        self.sql_db_vertical_layout_widget_1.setObjectName("sql_db_vertical_layout_widget_1")
-        self.sql_db_vertical_layout_widget_1.setGeometry(QRect(20, 240, 381, 155))
-        self.sql_db_vertical_layout_1 = QVBoxLayout(self.sql_db_vertical_layout_widget_1)
-        self.sql_db_vertical_layout_1.setObjectName("sql_db_vertical_layout_1")
-        self.sql_db_vertical_layout_1.setContentsMargins(0, 0, 0, 0)
-
-        # !!! rename checkBox_tab_sql_bioanalis_table_list to sql_db_checkBox_choose_table
-        self.sql_db_checkBox_choose_table = QCheckBox(self.sql_db_vertical_layout_widget_1)
-        self.sql_db_checkBox_choose_table.setObjectName("sql_db_checkBox_choose_table")
-        self.sql_db_checkBox_choose_table.setEnabled(False)
-        self.sql_db_checkBox_choose_table.setText("Выберите таблицу биоанализа")
-
-        # !!! rename comboBox_tab_sql_bioanalis_table_list to sql_db_checkBox_choose_bioanalis_table
-        self.sql_db_checkBox_choose_bioanalis_table = QComboBox(self.sql_db_vertical_layout_widget_1)
-        self.sql_db_checkBox_choose_bioanalis_table.setObjectName("sql_db_checkBox_choose_bioanalis_table")
-        self.sql_db_checkBox_choose_bioanalis_table.setEnabled(False)
-
-        # !!! rename label_export_age_structure_calculation_to_sql to label_choose_table_age_struct
-        self.label_choose_table_age_struct = QLabel(self.sql_db_vertical_layout_widget_1)
-        self.label_choose_table_age_struct.setObjectName("label_choose_table_age_struct")
-        self.label_choose_table_age_struct.setText("Выберете таблицу age_struct для экспорта")
-
-        # !!! rename comboBox_export_age_structure_calculation_to_sql to comboBox_choose_table_age_struct
-        self.comboBox_choose_table_age_struct = QComboBox(self.sql_db_vertical_layout_widget_1)
-        self.comboBox_choose_table_age_struct.setObjectName(
-            "comboBox_choose_table_age_struct")
-        self.comboBox_choose_table_age_struct.setEnabled(False)
-
-        # !!! rename label_export_age_structure_persent_calculation_to_sql to label_choose_table_age_struct_persent
-        self.label_choose_table_age_struct_persent = QLabel(self.sql_db_vertical_layout_widget_1)
-        self.label_choose_table_age_struct_persent.setObjectName(
-            "label_choose_table_age_struct_persent")
-        self.label_choose_table_age_struct_persent.setEnabled(True)
-        self.label_choose_table_age_struct_persent.setText("Выберете таблицу age_struct_persent для экспорта")
-
-        # !!! rename comboBox_export_age_structure_persent_calculation_to_sql to
-        # comboBox_choose_table_age_struct_persent
-        self.comboBox_choose_table_age_struct_persent = QComboBox(self.sql_db_vertical_layout_widget_1)
-        self.comboBox_choose_table_age_struct_persent.setObjectName(
-            "comboBox_choose_table_age_struct_persent")
-        self.comboBox_choose_table_age_struct_persent.setEnabled(False)
-
-        # add widgets to vertical layouts
-        self.sql_db_vertical_layout_1.addWidget(self.sql_db_checkBox_choose_table)
-        self.sql_db_vertical_layout_1.addWidget(self.sql_db_checkBox_choose_bioanalis_table)
-        self.sql_db_vertical_layout_1.addWidget(self.label_choose_table_age_struct)
-        self.sql_db_vertical_layout_1.addWidget(self.comboBox_choose_table_age_struct)
-        self.sql_db_vertical_layout_1.addWidget(self.label_choose_table_age_struct_persent)
-        self.sql_db_vertical_layout_1.addWidget(self.comboBox_choose_table_age_struct_persent)
-
-        self.grid_layout.addWidget(self.tab_widget, 0, 0, 1, 1)
-
-        if not main_window.objectName():
-            main_window.setObjectName("main_window")
-        main_window.resize(874, 558)
-
-    def setup_ui(self, main_window):
-        if not main_window.objectName():
-            main_window.setObjectName("main_window")
-        main_window.resize(874, 558)
-
-        self.centralwidget = QWidget(main_window)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        if not MainWindow.objectName():
+            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.resize(874, 558)
+        self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -465,21 +357,21 @@ class UiMainWindow:
 
         self.gridLayout.addWidget(self.age_structure_calculation, 0, 0, 1, 1)
 
-        main_window.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(main_window)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 874, 26))
-        main_window.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(main_window)
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
-        main_window.setStatusBar(self.statusbar)
+        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(main_window)
+        self.retranslateUi(MainWindow)
 
         self.age_structure_calculation.setCurrentIndex(2)
 
 
-        QMetaObject.connectSlotsByName(main_window)
+        QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
@@ -514,3 +406,4 @@ class UiMainWindow:
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"\u0411\u0438\u043e \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438", None))
         self.age_structure_calculation.setTabText(self.age_structure_calculation.indexOf(self.tab_5), QCoreApplication.translate("MainWindow", u"\u041f\u0440\u043e\u043c.\u0440\u0430\u0439\u043e\u043d\u044b", None))
     # retranslateUi
+

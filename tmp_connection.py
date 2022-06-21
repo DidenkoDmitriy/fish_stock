@@ -1,7 +1,7 @@
 import sys
 import SQL_Lib as sql_lib
 from PySide6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
-from ui_form import Ui_MainWindow
+from ui_form_old import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):

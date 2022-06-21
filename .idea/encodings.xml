@@ -3,7 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/connection_settings.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/kharius.py" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ui_form.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ui_form_old.py" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
