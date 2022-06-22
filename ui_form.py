@@ -14,13 +14,11 @@ class UiMainWindow:
         main_window.setCentralWidget(self.central_widget)
         main_window.setWindowTitle("Fish")
 
-        # Initialize grid
-        self.grid_layout = QGridLayout(self.central_widget)
-        self.grid_layout.setObjectName("grid_layout")
-
         # Initialize tab SQL base connect
         self.tab_SQL_Base_connect = QWidget()
         self.tab_SQL_Base_connect.setObjectName("tab_SQL_Base_connect")
+        self.tab_age_struct = QWidget()
+        self.tab_age_struct.setObjectName("tab_age_struct")
 
         # Initialize tab_widget + tabs adding
         # tab_widget contains tabs (individually)
@@ -29,21 +27,23 @@ class UiMainWindow:
         self.tab_widget.setObjectName("tab_widget")
         self.tab_widget.setEnabled(True)
         self.tab_widget.addTab(self.tab_SQL_Base_connect, "")
+        self.tab_widget.addTab(self.tab_age_struct, "")
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.tab_SQL_Base_connect), "SQL DB")
+        self.tab_widget.setTabText(self.tab_widget.indexOf(self.tab_age_struct), "Расчет возрастной структуры")
 
         # add font type
-
         font = QFont()
         font.setFamilies(["Times New Roman"])
         font.setPointSize(12)
         font.setBold(True)
 
-        font1 = QFont()
-        font1.setFamilies(["Times New Roman"])
-        font1.setPointSize(12)
+        font_connect = QFont()
+        font_connect.setFamilies(["Times New Roman"])
+        font_connect.setPointSize(12)
+
+        # ui for tab sql db
 
         # credentials sections
-
         self.label_DB_Name = QLabel(self.tab_SQL_Base_connect)
         self.label_DB_Name.setObjectName("label_DB_Name")
         self.label_DB_Name.setGeometry(QRect(10, 130, 131, 51))
@@ -138,7 +138,7 @@ class UiMainWindow:
         self.checkBox_connect_to_SQL_DB.setObjectName("checkBox_connect_to_SQL_DB")
         self.checkBox_connect_to_SQL_DB.setEnabled(True)
         self.checkBox_connect_to_SQL_DB.setGeometry(QRect(150, 190, 150, 30))
-        self.checkBox_connect_to_SQL_DB.setFont(font1)
+        self.checkBox_connect_to_SQL_DB.setFont(font_connect)
         self.checkBox_connect_to_SQL_DB.setText("Connected")
 
 
@@ -198,6 +198,34 @@ class UiMainWindow:
         self.sql_db_vertical_layout_2.addWidget(self.label_choose_table_privat_register)
         self.sql_db_vertical_layout_2.addWidget(self.comboBox_choose_table_privat_register)
         self.sql_db_vertical_layout_2.addWidget(self.checkBox_save_choose_table_catch_history)
+
+        # ui for tab age struct
+
+        # rename textEdit_age_structure_calculation_for_print_dataframe to textEdit_print_dataframe
+        # rename comboBox_tab_age_struct_area_list to comboBox_tab_age_struct_area
+        self.textEdit_print_dataframe = QTextEdit(self.tab_age_struct)
+        self.textEdit_print_dataframe.setObjectName("textEdit_print_dataframe")
+        self.textEdit_print_dataframe.setGeometry(QRect(20, 210, 631, 221))
+        self.comboBox_tab_age_struct_area = QComboBox(self.gridLayoutWidget)
+        self.comboBox_tab_age_struct_area.setObjectName("comboBox_tab_age_struct_area")
+        self.comboBox_tab_age_struct_area.setEnabled(False)
+
+        # add widgets to grid layout
+        self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_area, 7, 2, 1, 1)
+
+
+        # Initialize grid
+        # rename gridLayout_2 to grid_layout_age_struct
+        self.grid_layout = QGridLayout(self.central_widget)
+        self.grid_layout.setObjectName("grid_layout")
+        self.gridLayoutWidget = QWidget(self.tab_age_struct)
+        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        self.gridLayoutWidget.setGeometry(QRect(20, 20, 631, 191))
+        self.grid_layout_age_struct = QGridLayout(self.gridLayoutWidget)
+        self.grid_layout_age_struct.setObjectName("grid_layout_age_struct")
+        self.grid_layout_age_struct.setContentsMargins(0, 0, 0, 0)
+        self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_area, 7, 2, 1, 1)
+
 
         self.grid_layout.addWidget(self.tab_widget, 0, 0, 1, 1)
 
