@@ -201,6 +201,17 @@ class UiMainWindow:
 
         # ui for tab age struct
 
+        # Initialize grid
+        # rename gridLayout_2 to grid_layout_age_struct
+        self.grid_layout = QGridLayout(self.central_widget)
+        self.grid_layout.setObjectName("grid_layout")
+        self.gridLayoutWidget = QWidget(self.tab_age_struct)
+        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        self.gridLayoutWidget.setGeometry(QRect(20, 20, 631, 191))
+        self.grid_layout_age_struct = QGridLayout(self.gridLayoutWidget)
+        self.grid_layout_age_struct.setObjectName("grid_layout_age_struct")
+        self.grid_layout_age_struct.setContentsMargins(0, 0, 0, 0)
+
         # rename textEdit_age_structure_calculation_for_print_dataframe to textEdit_print_dataframe
         # rename comboBox_tab_age_struct_area_list to comboBox_tab_age_struct_area
         self.textEdit_print_dataframe = QTextEdit(self.tab_age_struct)
@@ -212,20 +223,6 @@ class UiMainWindow:
 
         # add widgets to grid layout
         self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_area, 7, 2, 1, 1)
-
-
-        # Initialize grid
-        # rename gridLayout_2 to grid_layout_age_struct
-        self.grid_layout = QGridLayout(self.central_widget)
-        self.grid_layout.setObjectName("grid_layout")
-        self.gridLayoutWidget = QWidget(self.tab_age_struct)
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(20, 20, 631, 191))
-        self.grid_layout_age_struct = QGridLayout(self.gridLayoutWidget)
-        self.grid_layout_age_struct.setObjectName("grid_layout_age_struct")
-        self.grid_layout_age_struct.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_area, 7, 2, 1, 1)
-
 
         self.grid_layout.addWidget(self.tab_widget, 0, 0, 1, 1)
 
