@@ -31,11 +31,19 @@ class UiMainWindow:
         self.tab_widget.addTab(self.tab_SQL_Base_connect, "")
         self.tab_widget.setTabText(self.tab_widget.indexOf(self.tab_SQL_Base_connect), "SQL DB")
 
-        # credentials sections
+        # add font type
+
         font = QFont()
-        font.setFamilies([u"Times New Roman"])
+        font.setFamilies(["Times New Roman"])
         font.setPointSize(12)
         font.setBold(True)
+
+        font1 = QFont()
+        font1.setFamilies(["Times New Roman"])
+        font1.setPointSize(12)
+
+        # credentials sections
+
         self.label_DB_Name = QLabel(self.tab_SQL_Base_connect)
         self.label_DB_Name.setObjectName("label_DB_Name")
         self.label_DB_Name.setGeometry(QRect(10, 130, 131, 51))
@@ -115,6 +123,8 @@ class UiMainWindow:
             "comboBox_choose_table_age_struct_persent")
         self.comboBox_choose_table_age_struct_persent.setEnabled(False)
 
+
+
         # add widgets to vertical layouts
         self.sql_db_vertical_layout_1.addWidget(self.sql_db_checkBox_choose_table)
         self.sql_db_vertical_layout_1.addWidget(self.sql_db_checkBox_choose_bioanalis_table)
@@ -122,6 +132,72 @@ class UiMainWindow:
         self.sql_db_vertical_layout_1.addWidget(self.comboBox_choose_table_age_struct)
         self.sql_db_vertical_layout_1.addWidget(self.label_choose_table_age_struct_persent)
         self.sql_db_vertical_layout_1.addWidget(self.comboBox_choose_table_age_struct_persent)
+
+        # rename checkBox_tab_sql_connect_SQL_DB to checkBox_connect_to_SQL_DB
+        self.checkBox_connect_to_SQL_DB = QCheckBox(self.tab_SQL_Base_connect)
+        self.checkBox_connect_to_SQL_DB.setObjectName("checkBox_connect_to_SQL_DB")
+        self.checkBox_connect_to_SQL_DB.setEnabled(True)
+        self.checkBox_connect_to_SQL_DB.setGeometry(QRect(150, 190, 150, 30))
+        self.checkBox_connect_to_SQL_DB.setFont(font1)
+        self.checkBox_connect_to_SQL_DB.setText("Connected")
+
+
+
+
+        # !!! start work with right vertical layouts
+
+        # rename verticalLayoutWidget_3 to sql_db_vertical_layout_widget_2
+        # rename verticalLayout_7 to sql_db_vertical_layout_2
+        self.sql_db_vertical_layout_widget_2 = QWidget(self.tab_SQL_Base_connect)
+        self.sql_db_vertical_layout_widget_2.setObjectName("sql_db_vertical_layout_widget_2")
+        self.sql_db_vertical_layout_widget_2.setGeometry(QRect(430, 240, 391, 181))
+        self.sql_db_vertical_layout_2 = QVBoxLayout(self.sql_db_vertical_layout_widget_2)
+        self.sql_db_vertical_layout_2.setObjectName("sql_db_vertical_layout_2")
+        self.sql_db_vertical_layout_2.setContentsMargins(0, 0, 0, 0)
+
+        # rename label_choose_catch_history_table to label_choose_table_catch_history
+        self.label_choose_table_catch_history = QLabel(self.sql_db_vertical_layout_widget_2)
+        self.label_choose_table_catch_history.setObjectName("label_choose_table_catch_history")
+        self.label_choose_table_catch_history.setText("Выберете таблицу истории вылова")
+
+        # rename comboBox_catch_history_table_choose to comboBox_choose_table_catch_history
+        self.comboBox_choose_table_catch_history = QComboBox(self.sql_db_vertical_layout_widget_2)
+        self.comboBox_choose_table_catch_history.setObjectName("comboBox_choose_table_catch_history")
+        self.comboBox_choose_table_catch_history.setEnabled(False)
+
+        # rename label_choose_commercial_register_table to label_choose_table_commercial_register
+        self.label_choose_table_commercial_register = QLabel(self.sql_db_vertical_layout_widget_2)
+        self.label_choose_table_commercial_register.setObjectName("label_choose_table_commercial_register")
+        self.label_choose_table_commercial_register.setText("Выберете таблицу регистр промыслового вылова")
+
+        # rename comboBox_catch_history_commercial_register_choose_table to comboBox_choose_table_commercial_register
+        self.comboBox_choose_table_commercial_register = QComboBox(self.sql_db_vertical_layout_widget_2)
+        self.comboBox_choose_table_commercial_register.setObjectName("comboBox_choose_table_commercial_register")
+        self.comboBox_choose_table_commercial_register.setEnabled(False)
+
+        # rename label_choose_privat_register_table to label_choose_table_privat_register
+        self.label_choose_table_privat_register = QLabel(self.sql_db_vertical_layout_widget_2)
+        self.label_choose_table_privat_register.setObjectName("label_choose_table_privat_register")
+        self.label_choose_table_privat_register.setText("Выберете таблицу регистр непромыслового вылова")
+
+        # rename comboBox_catch_history_privat_register_choose_table to comboBox_choose_table_privat_register
+        self.comboBox_choose_table_privat_register = QComboBox(self.sql_db_vertical_layout_widget_2)
+        self.comboBox_choose_table_privat_register.setObjectName("comboBox_choose_table_privat_register")
+        self.comboBox_choose_table_privat_register.setEnabled(False)
+
+        # rename checkBox_catch_history_save_choose_table to checkBox_save_choose_table_catch_history
+        self.checkBox_save_choose_table_catch_history = QCheckBox(self.sql_db_vertical_layout_widget_2)
+        self.checkBox_save_choose_table_catch_history.setObjectName(u"checkBox_catch_history_save_choose_table")
+        self.checkBox_save_choose_table_catch_history.setEnabled(False)
+        self.checkBox_save_choose_table_catch_history.setText("Сохранить выбор таблиц")
+
+        self.sql_db_vertical_layout_2.addWidget(self.label_choose_table_catch_history)
+        self.sql_db_vertical_layout_2.addWidget(self.comboBox_choose_table_catch_history)
+        self.sql_db_vertical_layout_2.addWidget(self.label_choose_table_commercial_register)
+        self.sql_db_vertical_layout_2.addWidget(self.comboBox_choose_table_commercial_register)
+        self.sql_db_vertical_layout_2.addWidget(self.label_choose_table_privat_register)
+        self.sql_db_vertical_layout_2.addWidget(self.comboBox_choose_table_privat_register)
+        self.sql_db_vertical_layout_2.addWidget(self.checkBox_save_choose_table_catch_history)
 
         self.grid_layout.addWidget(self.tab_widget, 0, 0, 1, 1)
 
