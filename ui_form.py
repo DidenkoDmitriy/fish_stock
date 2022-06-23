@@ -123,8 +123,6 @@ class UiMainWindow:
             "comboBox_choose_table_age_struct_persent")
         self.comboBox_choose_table_age_struct_persent.setEnabled(False)
 
-
-
         # add widgets to vertical layouts
         self.sql_db_vertical_layout_1.addWidget(self.sql_db_checkBox_choose_table)
         self.sql_db_vertical_layout_1.addWidget(self.sql_db_checkBox_choose_bioanalis_table)
@@ -140,11 +138,6 @@ class UiMainWindow:
         self.checkBox_connect_to_SQL_DB.setGeometry(QRect(150, 190, 150, 30))
         self.checkBox_connect_to_SQL_DB.setFont(font_connect)
         self.checkBox_connect_to_SQL_DB.setText("Connected")
-
-
-
-
-        # !!! start work with right vertical layouts
 
         # rename verticalLayoutWidget_3 to sql_db_vertical_layout_widget_2
         # rename verticalLayout_7 to sql_db_vertical_layout_2
@@ -212,17 +205,155 @@ class UiMainWindow:
         self.grid_layout_age_struct.setObjectName("grid_layout_age_struct")
         self.grid_layout_age_struct.setContentsMargins(0, 0, 0, 0)
 
-        # rename textEdit_age_structure_calculation_for_print_dataframe to textEdit_print_dataframe
-        # rename comboBox_tab_age_struct_area_list to comboBox_tab_age_struct_area
-        self.textEdit_print_dataframe = QTextEdit(self.tab_age_struct)
-        self.textEdit_print_dataframe.setObjectName("textEdit_print_dataframe")
-        self.textEdit_print_dataframe.setGeometry(QRect(20, 210, 631, 221))
-        self.comboBox_tab_age_struct_area = QComboBox(self.gridLayoutWidget)
-        self.comboBox_tab_age_struct_area.setObjectName("comboBox_tab_age_struct_area")
-        self.comboBox_tab_age_struct_area.setEnabled(False)
+        # Initialize widgets
+
+        # vertical layouts section
+
+        # vl types
+        # rename label_tab_age_struct_type_list to label_tab_age_struct_type
+        # rename comboBox_tab_age_struct_type_list_choose_column to comboBox_tab_age_struct_type_choose_column
+        self.label_tab_age_struct_type = QLabel(self.gridLayoutWidget)
+        self.label_tab_age_struct_type.setObjectName(
+            "label_tab_age_struct_type")
+        self.label_tab_age_struct_type.setText("Виды")
+        self.comboBox_tab_age_struct_type_choose_column = QComboBox(self.gridLayoutWidget)
+        self.comboBox_tab_age_struct_type_choose_column.setObjectName(
+            "comboBox_tab_age_struct_type_choose_column")
+        self.comboBox_tab_age_struct_type_choose_column.setEnabled(False)
+
+        # rename verticalLayout to verticalLayout_types
+        self.verticalLayout_types = QVBoxLayout()
+        self.verticalLayout_types.setObjectName("verticalLayout_types")
+        self.verticalLayout_types.addWidget(self.label_tab_age_struct_type)
+        self.verticalLayout_types.addWidget(self.comboBox_tab_age_struct_type_choose_column)
+
+        # vl years
+        # rename label_tab_age_struct_year_list to label_tab_age_struct_year
+        # rename comboBox_tab_age_struct_year_list_choose_column to comboBox_tab_age_struct_yearse_column
+        self.label_tab_age_struct_year = QLabel(self.gridLayoutWidget)
+        self.label_tab_age_struct_year.setObjectName("label_tab_age_struct_year")
+        self.label_tab_age_struct_year.setText("Года")
+        self.comboBox_tab_age_struct_year_choose_column = QComboBox(self.gridLayoutWidget)
+        self.comboBox_tab_age_struct_year_choose_column.setObjectName(
+            "comboBox_tab_age_struct_year_choose_column")
+        self.comboBox_tab_age_struct_year_choose_column.setEnabled(False)
+
+        # rename verticalLayout_5 to verticalLayout_years
+        self.verticalLayout_years = QVBoxLayout()
+        self.verticalLayout_years.setObjectName("verticalLayout_years")
+        self.verticalLayout_years.addWidget(self.label_tab_age_struct_year)
+        self.verticalLayout_years.addWidget(self.comboBox_tab_age_struct_year_choose_column)
+
+        # vl areas
+        # rename label_tab_age_struct_area_list to label_tab_age_struct_area
+        # rename comboBox_tab_age_struct_area_list_choose_column to comboBox_tab_age_struct_area_e_column
+        self.label_tab_age_struct_area = QLabel(self.gridLayoutWidget)
+        self.label_tab_age_struct_area.setObjectName("label_tab_age_struct_area")
+        self.label_tab_age_struct_area.setText("Места лова")
+        self.comboBox_tab_age_struct_area_choose_column = QComboBox(self.gridLayoutWidget)
+        self.comboBox_tab_age_struct_area_choose_column.setObjectName(
+            "comboBox_tab_age_struct_area_choose_column")
+        self.comboBox_tab_age_struct_area_choose_column.setEnabled(False)
+
+        # rename verticalLayout_3 to verticalLayout_areas
+        self.verticalLayout_areas = QVBoxLayout()
+        self.verticalLayout_areas.setObjectName("verticalLayout_areas")
+        self.verticalLayout_areas.addWidget(self.label_tab_age_struct_area)
+        self.verticalLayout_areas.addWidget(self.comboBox_tab_age_struct_area_choose_column)
+
+        # Button choose column
+        self.pushButton_age_struct_choose_column = QPushButton(self.gridLayoutWidget)
+        self.pushButton_age_struct_choose_column.setObjectName("pushButton_age_struct_choose_column")
+        self.pushButton_age_struct_choose_column.setEnabled(False)
+        self.pushButton_age_struct_choose_column.setText("Выбор столбцов")
+
+        # checkBox choose column with type
+        # rename checkBox_tab_age_struct_type_list_choose_column to checkBox_tab_age_struct_choose_column_type
+        self.checkBox_tab_age_struct_choose_column_type = QCheckBox(self.gridLayoutWidget)
+        self.checkBox_tab_age_struct_choose_column_type.setObjectName(
+            "checkBox_tab_age_struct_choose_column_type")
+        self.checkBox_tab_age_struct_choose_column_type.setEnabled(False)
+        self.checkBox_tab_age_struct_choose_column_type.setText("Выбор столбца с видом")
+
+        # checkBox choose column with years
+        # rename checkBox_tab_age_struct_year_list_choose_column to checkBox_tab_age_struct_choose_column_year
+        self.checkBox_tab_age_struct_choose_column_year = QCheckBox(self.gridLayoutWidget)
+        self.checkBox_tab_age_struct_choose_column_year.setObjectName(
+            "checkBox_tab_age_struct_choose_column_year")
+        self.checkBox_tab_age_struct_choose_column_year.setEnabled(False)
+        self.checkBox_tab_age_struct_choose_column_year.setText("Выбор столбца с годами лова")
+
+        # checkBox choose column with areas
+        # rename checkBox_tab_age_struct_area_list_choose_column to checkBox_tab_age_struct_choose_column_area
+        self.checkBox_tab_age_struct_choose_column_area = QCheckBox(self.gridLayoutWidget)
+        self.checkBox_tab_age_struct_choose_column_area.setObjectName(
+            "checkBox_tab_age_struct_choose_column_area")
+        self.checkBox_tab_age_struct_choose_column_area.setEnabled(False)
+        self.checkBox_tab_age_struct_choose_column_area.setText("Выбор столбца с местами лова")
+
+        # comboBox choose value - type
+        # rename comboBox_tab_age_struct_type_list to comboBox_tab_age_struct_choose_value_type
+        self.comboBox_tab_age_struct_choose_value_type = QComboBox(self.gridLayoutWidget)
+        self.comboBox_tab_age_struct_choose_value_type.setObjectName(
+            "comboBox_tab_age_struct_choose_value_type")
+        self.comboBox_tab_age_struct_choose_value_type.setEnabled(False)
+
+        # comboBox choose value - years
+        # rename comboBox_tab_age_struct_year_list to comboBox_tab_age_struct_choose_value_year
+        self.comboBox_tab_age_struct_choose_value_year = QComboBox(self.gridLayoutWidget)
+        self.comboBox_tab_age_struct_choose_value_year.setObjectName(
+            "comboBox_tab_age_struct_choose_value_year")
+        self.comboBox_tab_age_struct_choose_value_year.setEnabled(False)
+
+        # comboBox choose value - areas
+        # rename comboBox_tab_age_struct_area_list to comboBox_tab_age_struct_choose_value_area
+        self.comboBox_tab_age_struct_choose_value_area = QComboBox(self.gridLayoutWidget)
+        self.comboBox_tab_age_struct_choose_value_area.setObjectName(
+            "comboBox_tab_age_struct_choose_value_area")
+        self.comboBox_tab_age_struct_choose_value_area.setEnabled(False)
+
+        # Button choose value
+        self.pushButton_age_struct_choose_values = QPushButton(self.gridLayoutWidget)
+        self.pushButton_age_struct_choose_values.setObjectName(
+            "pushButton_age_struct_choose_values")
+        self.pushButton_age_struct_choose_values.setEnabled(False)
+        self.pushButton_age_struct_choose_values.setText("Выбор значений")
+
+        # textEdit for print dataframe
+        # rename textEdit_age_structure_calculation_for_print_dataframe to textEdit_tab_age_struct_for_print_dataframe
+        self.textEdit_tab_age_struct_for_print_dataframe = QTextEdit(self.tab_age_struct)
+        self.textEdit_tab_age_struct_for_print_dataframe.setObjectName(
+            "textEdit_tab_age_struct_for_print_dataframe")
+        self.textEdit_tab_age_struct_for_print_dataframe.setGeometry(QRect(20, 210, 631, 221))
+
+        # Button Save to SQL
+        self.pushButton_export_age_structure_calculation_to_sql = QPushButton(self.tab_age_struct)
+        self.pushButton_export_age_structure_calculation_to_sql.setObjectName(
+            "pushButton_export_age_structure_calculation_to_sql")
+        self.pushButton_export_age_structure_calculation_to_sql.setEnabled(False)
+        self.pushButton_export_age_structure_calculation_to_sql.setText("Save to SQL")
+        self.pushButton_export_age_structure_calculation_to_sql.setGeometry(QRect(690, 170, 111, 28))
+
+        # Button Load from sql
+        self.pushButton_load_age_structure_from_sql = QPushButton(self.tab_age_struct)
+        self.pushButton_load_age_structure_from_sql.setObjectName(u"pushButton_load_age_structure_from_sql")
+        self.pushButton_load_age_structure_from_sql.setEnabled(False)
+        self.pushButton_load_age_structure_from_sql.setText("Load from SQL")
+        self.pushButton_load_age_structure_from_sql.setGeometry(QRect(690, 200, 111, 28))
 
         # add widgets to grid layout
-        self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_area, 7, 2, 1, 1)
+        self.grid_layout_age_struct.addLayout(self.verticalLayout_types, 1, 0, 1, 1)
+        self.grid_layout_age_struct.addLayout(self.verticalLayout_years, 1, 1, 1, 1)
+        self.grid_layout_age_struct.addLayout(self.verticalLayout_areas, 1, 2, 1, 1)
+        self.grid_layout_age_struct.addWidget(self.pushButton_age_struct_choose_column, 2, 0, 1, 3)
+        self.grid_layout_age_struct.addWidget(self.checkBox_tab_age_struct_choose_column_type, 6, 0, 1, 1)
+        self.grid_layout_age_struct.addWidget(self.checkBox_tab_age_struct_choose_column_year, 6, 1, 1, 1)
+        self.grid_layout_age_struct.addWidget(self.checkBox_tab_age_struct_choose_column_area, 6, 2, 1, 1)
+        self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_choose_value_type, 7, 0, 1, 1)
+        self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_choose_value_year, 7, 1, 1, 1)
+        self.grid_layout_age_struct.addWidget(self.comboBox_tab_age_struct_choose_value_area, 7, 2, 1, 1)
+        # self.grid_layout_age_struct.addWidget(self.pushButton_age_struct_choose_values, 8, 0, 1, 3)
+        self.grid_layout_age_struct.addWidget(self.pushButton_age_struct_choose_values, 8, 0, 2, 3)
 
         self.grid_layout.addWidget(self.tab_widget, 0, 0, 1, 1)
 
@@ -492,6 +623,8 @@ class UiMainWindow:
         self.pushButton_load_age_structure_from_sql.setEnabled(False)
         self.pushButton_load_age_structure_from_sql.setGeometry(QRect(690, 200, 111, 28))
         self.age_structure_calculation.addTab(self.tab_age_struct, "")
+        # !!!!!!!!!!!!!!!!!!!
+        # ОСТАНОВИЛИСЬ ЗДЕСЬ!!!!
         self.tab_4 = QWidget()
         self.tab_4.setObjectName(u"tab_4")
         self.gridLayoutWidget_2 = QWidget(self.tab_4)
